@@ -1,0 +1,60 @@
+<resources>
+
+
+
+
+
+
+
+
+
+
+    <style name="Qc.TextCommonGrey" parent="Base.TextAppearance.AppCompat">
+        <item name="android:textColor">@color/text_grey</item>
+        <item name="android:textSize">@dimen/common_font</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+    <style name="Qc.TextCommonBlack" parent="Base.TextAppearance.AppCompat">
+        <item name="android:textColor">@color/text_black</item>
+        <item name="android:textSize">@dimen/common_font</item>
+        <item name="android:gravity">center_vertical</item>
+
+    </style>
+    <style name="Qc.TextCommonWhite" parent="Base.TextAppearance.AppCompat">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/large_font</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+
+
+
+
+
+
+
+
+    <style name="ChoosePicDialogStyle" parent="AlertDialog.AppCompat">
+        <!-- 背景颜色及透明程度 -->
+        <item name="android:windowBackground">@color/white</item>
+        <!-- 是否有标题 -->
+        <item name="android:windowNoTitle">true</item>
+        <!-- 是否浮现在activity之上 -->
+        <item name="android:windowIsFloating">true</item>
+        <!-- 是否模糊 -->
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:windowCloseOnTouchOutside">true</item>
+        <item name="android:windowFrame">@null</item>
+    </style>
+
+    <style name="ButtomDialogStyle" parent="android:Animation">
+        <item name="@android:windowEnterAnimation">@anim/slide_from_bottom</item>
+        <item name="@android:windowExitAnimation">@anim/slide_out_bottom</item>
+    </style>
+
+
+
+
+
+
+</resources>

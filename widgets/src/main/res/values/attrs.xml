@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+
+    attrs for pwview
+    -->
+    <declare-styleable name="PasswordView">
+        <attr name="pw_mode" format="boolean"/>
+        <attr name="pw_show_left" format="boolean"/>
+    </declare-styleable>
+
+    <declare-styleable name="AnimatedButton">
+        <attr name="ab_drawable_on" format="reference"/>
+        <attr name="ab_drawable_off" format="reference"/>
+        <attr name="ab_color" format="color"/>
+    </declare-styleable>
+
+
+    <declare-styleable name="PhoneEditText">
+        <attr name="phone_show_icon" format="boolean"/>
+        <attr name="phone_hint" format="string"/>
+    </declare-styleable>
+
+
+
+    <declare-styleable name="TabView">
+        <attr name="text_size" format="dimension"/>
+        <attr name="text_normal_color" format="color"/>
+        <attr name="text_select_color" format="color"/>
+        <attr name="item_padding" format="dimension"/>
+    </declare-styleable>
+</resources>
