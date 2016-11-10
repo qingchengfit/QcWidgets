@@ -38,6 +38,13 @@
 
 
 
+    <style name="TextTitleHint" parent="@style/Qc.TextCommonGrey">
+        <item name="android:textSize">12sp</item>
+        <item name="android:paddingLeft">@dimen/activity_horizontal_margin</item>
+        <item name="android:paddingRight">@dimen/activity_horizontal_margin</item>
+        <item name="android:gravity">center_vertical|left</item>
+        <item name="android:background">@color/bg_grey</item>
+    </style>
 
 
     <style name="Qc.TextCommonGrey" parent="Base.TextAppearance.AppCompat">

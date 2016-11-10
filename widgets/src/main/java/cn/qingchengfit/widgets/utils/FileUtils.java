@@ -35,7 +35,19 @@ import java.io.UnsupportedEncodingException;
  * Created by Paper on 15/7/31 2015.
  */
 public class FileUtils {
+    public static File getTmpImageFile(Context context) {
+        File file;
+        if (context.getExternalCacheDir() != null) {
+            String path = context.getExternalCacheDir().getAbsolutePath();
 
+            file = new File(path + File.separator + "tmp_img");
+
+        } else {
+            file = new File(context.getCacheDir().getAbsolutePath() + File.separator + "tmp_img");
+        }
+
+        return file;
+    }
     public static File getFileFromBytes(byte[] b, String outputFile) {
         BufferedOutputStream stream = null;
         File file = null;

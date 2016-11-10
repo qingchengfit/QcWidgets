@@ -23,7 +23,6 @@ public class DateUtils {
     public static final Long MONTH_TIME = 31 * 24 * 60 * 60 * 1000l;
     public static final Long DAY_TIME = 24 * 60 * 60 * 1000l;
     public static final Long HOUR_TIME = 60 * 60 * 1000l;
-
     public static Date formatDateFromServer(String s) {
         try {
             s = s.replace("T", " ");
@@ -34,14 +33,62 @@ public class DateUtils {
         } catch (ParseException e) {
 //            e.printStackTrace();
             return new Date();
-        }catch (Exception e){
+        } catch (Exception e) {
 //            e.printStackTrace();
             return new Date();
         }
 
     }
 
-    public static Date formatDateFromString(String s) {
+    public static String getYYYYMMDDfromServer(String s) {
+        try {
+            if (s.contains("T")) {
+                return DateUtils.Date2YYYYMMDD(DateUtils.formatDateFromServer(s));
+            } else return s;
+        }catch (Exception e){
+            return "错误日期";
+        }
+    }
+
+
+    public static boolean isOutOfDate(Date date) {
+        return date.getTime() < getDayMid(new Date());
+    }
+
+    public static String DateToServer(Date date) {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
+        return formatter.format(date);
+    }
+
+
+    /**
+     * 获取3小时前的日期时间
+     * 返回格式 2016-09-09T10:00:00
+     * 签到列表参数用
+     * @return 2016-09-09T10:00:00
+     */
+    public static String date2YYMMDDTHHMMSS(Date date){
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
+        String dateStr = formatter.format(date);
+        String[] dateArr = dateStr.split(" ");
+        StringBuffer stringBuffer = new StringBuffer();
+        stringBuffer.append(dateArr[0]).append("T").append(dateArr[1]);
+        return stringBuffer.toString();
+    }
+
+    public static String formatToMMFromServer(String s) {
+        try {
+            s = s.replace("T", " ");
+            return s.substring(0, s.length() - 1);
+
+        } catch (Exception e) {
+//            e.printStackTrace();
+            return "";
+        }
+
+    }
+
+    public static Date formatDateFromYYYYMMDD(String s) {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA);
         Date date = null;
         try {
@@ -52,46 +99,61 @@ public class DateUtils {
         return date;
     }
 
-    public static Date formatDateFromStringDot(String s) {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy.MM.dd", Locale.CHINA);
+    public static Date getDateFromHHmmss(String s) {
+        SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss", Locale.CHINA);
         Date date = null;
         try {
             date = formatter.parse(s);
         } catch (ParseException e) {
+            e.printStackTrace();
         }
         return date;
     }
 
-    public static String getDateDay(Date d) {
-
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy.MM.dd", Locale.CHINA);
-        return formatter.format(d);
+    public static Date getDateFromHHmm(String s) {
+        SimpleDateFormat formatter = new SimpleDateFormat("HH:mm", Locale.CHINA);
+        Date date = null;
+        try {
+            date = formatter.parse(s);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return date;
     }
 
-    public static String getServerDateDay(Date d) {
+
+//    public static String getDateDay(Date d) {
+//
+//        SimpleDateFormat formatter = new SimpleDateFormat("yyyy.MM.dd", Locale.CHINA);
+//        return formatter.format(d);
+//    }
+
+    public static String Date2YYYYMMDD(Date d) {
 
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA);
         return formatter.format(d);
     }
-    public static String getServerDateDayAddMonth(Date d, int i) {
 
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA);
-        return formatter.format(addDateMonth(d,i));
-    }
-    public static String getServerDay(Date d) {
+//    public static String getServerDateDayAddMonth(Date d, int i) {
+//
+//        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA);
+//        return formatter.format(addDateMonth(d, i));
+//    }
+
+    public static String Date2YYYYMMDDHHmm(Date d) {
 
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CHINA);
         return formatter.format(d);
     }
 
-    public static String getOnlyDay(Date d) {
+    public static String Date2MMDD(Date d) {
 
         SimpleDateFormat formatter = new SimpleDateFormat("MM-dd", Locale.CHINA);
         return formatter.format(d);
     }
 
 
-    public static String getDateMonth(Date d) {
+    public static String Date2YYYYMM(Date d) {
 
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM", Locale.CHINA);
         return formatter.format(d);
@@ -101,10 +163,11 @@ public class DateUtils {
         SimpleDateFormat formatter = new SimpleDateFormat("HH:mm", Locale.CHINA);
         return formatter.format(d);
     }
+
     public static String formatToServer(Date d) {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA);
         SimpleDateFormat formatter2 = new SimpleDateFormat("HH:mm:ss", Locale.CHINA);
-        return formatter.format(d)+"T"+formatter2.format(d);
+        return formatter.format(d) + "T" + formatter2.format(d);
     }
 
     public static Date formatDateHHMM(String s) {
@@ -121,12 +184,14 @@ public class DateUtils {
 
         return s.replace(".", "-");
     }
-    public static Date addDateMonth(Date d, int i){
+
+    public static Date addDateMonth(Date d, int i) {
         Calendar c = Calendar.getInstance();
         c.setTime(d);
-        c.add(Calendar.MONTH,i);
+        c.add(Calendar.MONTH, i);
         return c.getTime();
     }
+
     /**
      * 得到本周周一
      *
@@ -139,7 +204,7 @@ public class DateUtils {
         if (day_of_week == 0)
             day_of_week = 7;
         c.add(Calendar.DATE, -day_of_week + 1);
-        return getServerDateDay(c.getTime());
+        return Date2YYYYMMDD(c.getTime());
     }
 
     /**
@@ -154,7 +219,7 @@ public class DateUtils {
         if (day_of_week == 0)
             day_of_week = 7;
         c.add(Calendar.DATE, -day_of_week + 7);
-        return getServerDateDay(c.getTime());
+        return Date2YYYYMMDD(c.getTime());
     }
 
     public static String getEndDayOfMonth(Date date) {
@@ -162,30 +227,58 @@ public class DateUtils {
         c.setTime(date);
         c.add(Calendar.MONTH, 1);
         c.set(Calendar.DAY_OF_MONTH, 0);
-        return getServerDateDay(c.getTime());
+        return Date2YYYYMMDD(c.getTime());
     }
+
+
     public static String getEndDayOfMonthNew(Date date) {
         Calendar c = Calendar.getInstance();
         c.setTime(date);
+        c.set(Calendar.DAY_OF_MONTH, c.getActualMaximum(Calendar.DAY_OF_MONTH));
+        return Date2YYYYMMDD(c.getTime());
+    }
+
+    public static String getEndDayOfMonthNew(int year, int month) {
+        Calendar c = Calendar.getInstance();
+        c.set(Calendar.YEAR, year);
+        c.set(Calendar.MONTH, month);
         c.add(Calendar.MONTH, 1);
         c.set(Calendar.DAY_OF_MONTH, 0);
-        c.add(Calendar.DAY_OF_MONTH, -1);
-        return getServerDateDay(c.getTime());
+        c.add(Calendar.DATE, -1);
+        return Date2YYYYMMDD(c.getTime());
+    }
+
+    public static String getStartDayOfMonth(int year, int month) {
+        Calendar c = Calendar.getInstance();
+        c.set(Calendar.YEAR, year);
+        c.set(Calendar.MONTH, month);
+        c.set(Calendar.DAY_OF_MONTH, 1);
+        return Date2YYYYMMDD(c.getTime());
     }
 
     public static String getStartDayOfMonth(Date date) {
         Calendar c = Calendar.getInstance();
         c.setTime(date);
         c.set(Calendar.DAY_OF_MONTH, 1);
-        return getServerDateDay(c.getTime());
+        return Date2YYYYMMDD(c.getTime());
     }
+
+    public static int interval(String start, String end) {
+        Date s = formatDateFromYYYYMMDD(start);
+        Date e = formatDateFromYYYYMMDD(end);
+        return (int) ((e.getTime() - s.getTime()) / DAY_TIME);
+    }
+    public static int interval(Date start, Date end) {
+        return (int) ((end.getTime() - start.getTime()) / DAY_TIME);
+    }
+
     public static int getDayOfWeek(Date date) {
         Calendar c = Calendar.getInstance();
         c.setTime(date);
         int i = c.get(Calendar.DAY_OF_WEEK);
-        if (i == 1){
+        if (i == 1) {
             return 6;
-        }else return i-2;
+        } else return i - 2;
     }
 
 
@@ -208,7 +301,8 @@ public class DateUtils {
         c.set(Calendar.MILLISECOND, 0);
         return c.getTimeInMillis();
     }
-    public static long getDayMid(Date d){
+
+    public static long getDayMid(Date d) {
         Calendar c = Calendar.getInstance();
         c.setTime(d);
         c.set(Calendar.HOUR_OF_DAY, 12);
@@ -217,9 +311,44 @@ public class DateUtils {
         c.set(Calendar.MILLISECOND, 0);
         return c.getTimeInMillis();
     }
-    public static int getYear(Date d){
+
+    public static String minusDay(Date d, int day) {
+        Calendar c = Calendar.getInstance();
+        c.setTime(d);
+        c.add(Calendar.DATE, -day);
+        return Date2YYYYMMDD(c.getTime());
+    }
+
+
+    public static int getYear(Date d) {
         Calendar c = Calendar.getInstance();
         c.setTime(d);
         return c.get(Calendar.YEAR);
     }
+
+    /**
+     * 记住要+1
+     *
+     * @param d 记住要+1
+     * @return
+     */
+    public static int getMonth(Date d) {
+        Calendar c = Calendar.getInstance();
+        c.setTime(d);
+        return c.get(Calendar.MONTH);
+    }
+
+
+    public static int dayNumFromToday(Date d) {
+        return (int) ((getDayMid(d) - getDayMid(new Date())) / DAY_TIME);
+    }
+
+    public static boolean AlessB(String YYYYMMDDa, String YYYYMMDDb) {
+        return formatDateFromYYYYMMDD(YYYYMMDDa).getTime() < formatDateFromYYYYMMDD(YYYYMMDDb).getTime();
+    }
+
+    public static boolean AlessOrEquelB(String YYYYMMDDa, String YYYYMMDDb) {
+        return formatDateFromYYYYMMDD(YYYYMMDDa).getTime() <= formatDateFromYYYYMMDD(YYYYMMDDb).getTime();
+    }
+
 }
