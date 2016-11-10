@@ -118,7 +118,7 @@ public class PhoneEditText extends LinearLayout implements View.OnClickListener,
 
         } else if (mDistrictInt == 1) {
             //china taiwan
-            if (phoneNum.length() != 9 || !phoneNum.startsWith("9")) {
+            if (phoneNum.length() != 10 || !phoneNum.startsWith("0")) {
                 ToastUtils.show(getResources().getString(R.string.err_login_phonenum));
                 return false;
             }
