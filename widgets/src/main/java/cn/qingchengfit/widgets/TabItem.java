@@ -1,11 +1,16 @@
 package cn.qingchengfit.widgets;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.VectorDrawable;
+import android.os.Build;
+import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
@@ -26,7 +31,6 @@ import android.view.View;
 public class TabItem extends View {
 
     /*字体大小*/
-
     private int mTextSize;
 
     /*字体选中的颜色*/
@@ -53,6 +57,9 @@ public class TabItem extends View {
     /*未选中时的图标*/
     private Bitmap mIconSelect;
 
+    /*小红点的图标*/
+    private Bitmap mIconCircle;
+
     /*用于记录字体大小*/
     private Rect mBoundText;
 
@@ -61,6 +68,9 @@ public class TabItem extends View {
 
     /*为选中时图标的画笔*/
     private Paint mIconPaintNormal;
+
+    /*小红点图标的画笔*/
+    private Paint mIconPaintCircle;
 
     public TabItem(Context context) {
         this(context, null);
@@ -74,6 +84,44 @@ public class TabItem extends View {
         super(context, attrs, defStyleAttr);
         initView();
         initText();
+    }
+
+    /**
+     * drawableId 获取 bitmap 对象
+     *
+     * @param context    context
+     * @param drawableId drawableId
+     * @return bitmap
+     */
+    private static Bitmap getBitmap(Context context, int drawableId) {
+        Drawable drawable = ContextCompat.getDrawable(context, drawableId);
+        if (drawable instanceof BitmapDrawable) {
+            return ((BitmapDrawable) drawable).getBitmap();
+        } else if (drawable instanceof VectorDrawable) {
+            return getBitmap(drawable);
+        } else {
+            try {
+                return getBitmap(drawable);
+            } catch (Exception e) {
+                throw new IllegalArgumentException("unsupported drawable type");
+            }
+        }
+    }
+
+    /**
+     * vectorDrawable to bitmap
+     *
+     * @param vectorDrawable vectorDrawable
+     * @return bitmap
+     */
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    private static Bitmap getBitmap(Drawable vectorDrawable) {
+        Bitmap bitmap = Bitmap.createBitmap(vectorDrawable.getIntrinsicWidth(),
+                vectorDrawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        vectorDrawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+        vectorDrawable.draw(canvas);
+        return bitmap;
     }
 
     /*初始化一些东西*/
@@ -100,6 +148,9 @@ public class TabItem extends View {
 
         mIconPaintNormal = new Paint(Paint.ANTI_ALIAS_FLAG);
         mIconPaintNormal.setAlpha(0xff);
+
+        mIconPaintCircle = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mIconPaintCircle.setAlpha(0);
     }
 
     /*测量字体的大小*/
@@ -170,6 +221,7 @@ public class TabItem extends View {
         float y = (mViewHeight + mIconNormal.getHeight() + mBoundText.height()) / 2.0F;
         canvas.drawText(mTextValue, x, y, mTextPaintNormal);
         canvas.drawText(mTextValue, x, y, mTextPaintSelect);
+        canvas.drawBitmap(mIconCircle, ((mViewWidth / 2) + (mIconNormal.getWidth() / 2)) + 5, y, mIconPaintCircle);
     }
 
     public void setTextSize(int textSize) {
@@ -195,8 +247,9 @@ public class TabItem extends View {
     }
 
     public void setIconText(int[] iconSelId, String TextValue) {
-        this.mIconSelect = BitmapFactory.decodeResource(getResources(), iconSelId[0]);
-        this.mIconNormal = BitmapFactory.decodeResource(getResources(), iconSelId[1]);
+        this.mIconSelect = getBitmap(getContext(), iconSelId[0]);
+        this.mIconNormal = getBitmap(getContext(), iconSelId[1]);
+        this.mIconCircle = getBitmap(getContext(), R.drawable.qcw_shape_circle_red);//小红点
         this.mTextValue = TextValue;
     }
 
@@ -209,5 +262,17 @@ public class TabItem extends View {
         mTextPaintSelect.setAlpha(paintAlpha);
         mTextPaintNormal.setAlpha(255 - paintAlpha);
         invalidate();
+    }
+
+    /**
+     * 通过 alpha 来设置 每个画笔的透明度，从而实现现实的效果
+     *
+     * @param alpha 1--不透明；0--透明
+     */
+    public void setPoint(float alpha) {
+        int paintAlpha = (int) (alpha * 255);
+        mIconPaintCircle.setAlpha(paintAlpha);
+        invalidate();
+
     }
 }
