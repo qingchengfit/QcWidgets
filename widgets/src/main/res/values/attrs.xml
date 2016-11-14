@@ -29,4 +29,16 @@
         <attr name="text_select_color" format="color"/>
         <attr name="item_padding" format="dimension"/>
     </declare-styleable>
+
+    <declare-styleable name="CheckableButton">
+        <attr name="cb_text_size" format="dimension" />
+        <attr name="cb_text_normal_color" format="color" />
+        <attr name="cb_text_select_color" format="color" />
+        <attr name="cb_text_content" format="string" />
+        <attr name="cb_select" format="boolean" />
+        <attr name="cb_background_select" format="reference" />
+        <attr name="cb_background_normal" format="reference" />
+        <attr name="cb_hook_icon_select" format="reference" />
+        <attr name="cb_hook_icon_normal" format="reference" />
+    </declare-styleable>
 </resources>

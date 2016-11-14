@@ -87,7 +87,7 @@ public class PhoneEditText extends LinearLayout implements View.OnClickListener,
     @Override
     public void onClick(View v) {
         if (mDialog == null)
-            mDialog = DialogList.builder(getContext()).list(getResources().getStringArray(R.array.country_and_districion_list), this).title("选择地区");
+            mDialog = DialogList.builder(getContext()).list(getResources().getStringArray(R.array.country_and_districion_list), this);
         if (!mDialog.isShowing())
             mDialog.show();
     }
@@ -118,7 +118,7 @@ public class PhoneEditText extends LinearLayout implements View.OnClickListener,
 
         } else if (mDistrictInt == 1) {
             //china taiwan
-            if (phoneNum.length() != 9 || !phoneNum.startsWith("9")) {
+            if (phoneNum.length() != 10 || !phoneNum.startsWith("09")) {
                 ToastUtils.show(getResources().getString(R.string.err_login_phonenum));
                 return false;
             }

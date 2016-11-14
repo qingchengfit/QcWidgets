@@ -82,12 +82,12 @@ public class PasswordView extends LinearLayout implements View.OnClickListener {
         if (isPwMode) {
             if (text.length() < 6) {
                 ToastUtils.show(getResources().getString(R.string.err_password_length));
-                return true;
+                return false;
             }
         } else {
             if (text.length() < 6) {
                 ToastUtils.show(getResources().getString(R.string.err_checkcode_length));
-                return true;
+                return false;
             }
         }
         return true;
