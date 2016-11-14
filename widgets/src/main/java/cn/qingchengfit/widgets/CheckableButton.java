@@ -112,15 +112,12 @@ public class CheckableButton extends RelativeLayout {
             @Override
             public void onClick(View view) {
                 checkBox.toggle();
-            }
-        });
-        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 initComponentRes();
             }
         });
+
         checkBox.setChecked(isChecked);
+        initComponentRes();
     }
 
     private void initComponentRes() {
@@ -130,11 +127,12 @@ public class CheckableButton extends RelativeLayout {
     }
 
     private boolean isChecked() {
-        return isChecked;
+        return checkBox.isChecked();
     }
 
     private void setChecked(boolean checked) {
         checkBox.setChecked(checked);
+        initComponentRes();
     }
 
     private void setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener listener) {
