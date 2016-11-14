@@ -159,7 +159,30 @@ public class TabView extends LinearLayout implements View.OnClickListener {
             tabItem.setTabAlpha(0);
         }
         mTabItems.get(position).setTabAlpha(1);
-        mViewPager.setCurrentItem(position, true);
+        mViewPager.setCurrentItem(position, false);
+    }
+
+    /**
+     * 设置某位置是否显示小红点
+     *
+     * @param position 位置
+     * @param isShow   true--show；false--dismiss
+     */
+    public void setPointStatu(int position, boolean isShow) {
+        if (position > 0 && position < mTabItems.size())
+            mTabItems.get(position).setPoint(isShow ? 1 : 0);
+    }
+
+    /*set red point */
+    public void setPoint(int position) {
+        if (position > 0 && position < mTabItems.size())
+            mTabItems.get(position).setPoint(1);
+    }
+
+    /*clear red point */
+    public void clearPoint(int position) {
+        if (position > 0 && position < mTabItems.size())
+            mTabItems.get(position).setPoint(0);
     }
 
     public interface OnItemIconTextSelectListener {
