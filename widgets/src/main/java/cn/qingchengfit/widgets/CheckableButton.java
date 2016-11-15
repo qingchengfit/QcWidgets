@@ -126,20 +126,20 @@ public class CheckableButton extends RelativeLayout {
         root.setBackgroundResource(checkBox.isChecked() ? mBackgroundSelect : mBackgroundNormal);
     }
 
-    private boolean isChecked() {
+    public boolean isChecked() {
         return checkBox.isChecked();
     }
 
-    private void setChecked(boolean checked) {
+    public void setChecked(boolean checked) {
         checkBox.setChecked(checked);
         initComponentRes();
     }
 
-    private void setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener listener) {
+    public void setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener listener) {
         checkBox.setOnCheckedChangeListener(listener);
     }
 
-    private void setContent(String contentStr) {
+    public void setContent(String contentStr) {
         content.setText(contentStr);
     }
 }

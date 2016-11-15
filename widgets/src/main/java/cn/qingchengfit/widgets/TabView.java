@@ -155,11 +155,15 @@ public class TabView extends LinearLayout implements View.OnClickListener {
         if (mViewPager.getCurrentItem() == position) {
             return;
         }
+        setCurrentItem(position);
+    }
+
+    public void setCurrentItem(int pos) {
         for (TabItem tabItem : mTabItems) {
             tabItem.setTabAlpha(0);
         }
-        mTabItems.get(position).setTabAlpha(1);
-        mViewPager.setCurrentItem(position, false);
+        mTabItems.get(pos).setTabAlpha(1);
+        mViewPager.setCurrentItem(pos, false);
     }
 
     /**
