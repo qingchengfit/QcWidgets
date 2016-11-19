@@ -19,6 +19,15 @@
         android:text="Hello World!" />
 
     <cn.qingchengfit.widgets.CheckableButton
+        android:id="@+id/btn1"
+        android:layout_width="80dp"
+        android:layout_height="39dp"
+        app:cb_select="false"
+        app:cb_text_content="测试" />
+
+    <cn.qingchengfit.widgets.CheckableButton
+        android:id="@+id/btn2"
+
         android:layout_width="80dp"
         android:layout_height="39dp"
         app:cb_select="true"

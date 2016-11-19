@@ -24,7 +24,7 @@
         android:layout_centerVertical="true"
         android:layout_marginRight="9dp"
         android:background="#0000"
-        android:button="@drawable/qcw_vector_hook"
-        tools:text="" />
+        android:button="@drawable/checkbox_hook"
+        />
 
 </RelativeLayout>
