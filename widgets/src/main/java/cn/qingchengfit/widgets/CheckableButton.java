@@ -3,7 +3,6 @@ package cn.qingchengfit.widgets;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.CheckBox;
@@ -46,6 +45,10 @@ public class CheckableButton extends RelativeLayout {
 
     private Context mContext;
 
+    private CompoundButton.OnCheckedChangeListener mListener ;
+
+
+
     public CheckableButton(Context context) {
         super(context);
         inflate(context, R.layout.qcw_layout_checkable_button, this);
@@ -86,7 +89,7 @@ public class CheckableButton extends RelativeLayout {
         mTextSize = (int) ta.getDimension(R.styleable.CheckableButton_cb_text_size
                 , mTextSize);
 
-        mCheckboxIconSelect = ta.getResourceId(R.styleable.CheckableButton_cb_hook_icon_select, R.drawable.qcw_vector_hook);
+        mCheckboxIconSelect = ta.getResourceId(R.styleable.CheckableButton_cb_hook_icon_select, R.drawable.checkbox_hook);
         mCheckboxIconNormal = ta.getResourceId(R.styleable.CheckableButton_cb_hook_icon_normal, 0);
 
         mBackgroundSelect = ta.getResourceId(R.styleable.CheckableButton_cb_background_select, R.drawable.qcw_shape_bgcenter_green);
@@ -112,18 +115,28 @@ public class CheckableButton extends RelativeLayout {
             @Override
             public void onClick(View view) {
                 checkBox.toggle();
-                initComponentRes();
+                if (onClickListener != null){
+                    onClickListener.onClick(view);
+                }
             }
         });
 
         checkBox.setChecked(isChecked);
-        initComponentRes();
+        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                root.setBackgroundResource(checkBox.isChecked() ? mBackgroundSelect : mBackgroundNormal);
+                content.setTextColor(checkBox.isChecked() ? mTextColorSelect : mTextColorNormal);
+            }
+        });
+        checkBox.setButtonDrawable(mCheckboxIconSelect);
+        root.setBackgroundResource(isChecked ? mBackgroundSelect : mBackgroundNormal);
+        content.setTextColor(isChecked ? mTextColorSelect : mTextColorNormal);
     }
 
-    private void initComponentRes() {
-        content.setTextColor(checkBox.isChecked() ? mTextColorSelect : mTextColorNormal);
-        checkBox.setButtonDrawable(checkBox.isChecked() ? ContextCompat.getDrawable(mContext, mCheckboxIconSelect) : null);
-        root.setBackgroundResource(checkBox.isChecked() ? mBackgroundSelect : mBackgroundNormal);
+
+    public void toggle(){
+        checkBox.setChecked(!checkBox.isChecked());
     }
 
     public boolean isChecked() {
@@ -132,11 +145,15 @@ public class CheckableButton extends RelativeLayout {
 
     public void setChecked(boolean checked) {
         checkBox.setChecked(checked);
-        initComponentRes();
     }
 
     public void setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener listener) {
-        checkBox.setOnCheckedChangeListener(listener);
+        mListener = listener;
+    }
+
+    private OnClickListener onClickListener;
+    public void setClick(OnClickListener listener){
+        this.onClickListener = listener;
     }
 
     public void setContent(String contentStr) {

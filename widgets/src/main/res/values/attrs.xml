@@ -41,4 +41,20 @@
         <attr name="cb_hook_icon_select" format="reference" />
         <attr name="cb_hook_icon_normal" format="reference" />
     </declare-styleable>
+
+
+    <declare-styleable name="ExpandedLayout">
+        <attr name="el_expanded" format="boolean"/>
+        <attr name="el_label" format="string"/>
+    </declare-styleable>
+
+
+
+    <declare-styleable name="RecycleNoImg">
+        <attr name="rn_drawable" format="reference"/>
+        <attr name="rn_hint" format="string"/>
+        <attr name="rn_color" format="color"/>
+        <attr name="rn_bottom_padding" format="dimension"/>
+        <attr name="rn_no_data_top" format="dimension"/>
+    </declare-styleable>
 </resources>

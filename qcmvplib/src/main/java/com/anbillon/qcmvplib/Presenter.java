@@ -15,7 +15,7 @@ import android.content.Intent;
  * <p>
  * Created by Paper on 15/11/18 2015.
  */
-interface Presenter {
+public interface Presenter {
     void onStart();
 
     void onStop();
