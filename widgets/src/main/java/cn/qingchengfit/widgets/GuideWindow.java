@@ -73,27 +73,22 @@ public class GuideWindow {
   }
 
   public void show(View view) {
-
+    int vh = view.getMeasuredHeight();
     switch (location) {
       case DOWN:
         DisplayMetrics dm = context.getResources().getDisplayMetrics();
         int w_screen = dm.widthPixels;
         textView.setMaxWidth(w_screen - view.getLeft() - 60);
         popview.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
-        int popupWidth = popview.getMeasuredWidth();
-        int popupHeight = popview.getMeasuredHeight();
-        int vh = view.getMeasuredHeight();
         popupWindow.showAsDropDown(view, (100 - vh / 2), 0);
         break;
       case UP:
-
         textView.setMaxWidth(view.getRight() - 50);
         popview.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
-        int popupWidth2 = popview.getMeasuredWidth();
-        int popupHeight2 = popview.getMeasuredHeight();
-        int vh2 = view.getMeasuredHeight();
-        int x = popupWidth2 - 210 + (vh2 / 2 - 105);
-        popupWindow.showAsDropDown(view, -x, -(popupHeight2 + vh2));
+        int popupWidth = popview.getMeasuredWidth();
+        int popupHeight = popview.getMeasuredHeight();
+        int x = popupWidth - 210 + (vh / 2 - 105);
+        popupWindow.showAsDropDown(view, -x, -(popupHeight + vh));
 
         break;
     }
