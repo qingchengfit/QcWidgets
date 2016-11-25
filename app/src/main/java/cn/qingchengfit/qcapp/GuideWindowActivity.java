@@ -29,7 +29,8 @@ public class GuideWindowActivity extends AppCompatActivity {
         break;
       case R.id.btn_above:
         GuideWindow guideWindow2 =
-            new GuideWindow(this, "hahahahahahahahahahahahahahahahahaha", GuideWindow.UP);
+            new GuideWindow(this, "hahahahahahahahahahahahahahahahahahahahahahahaha",
+                GuideWindow.UP);
         guideWindow2.show(view);
         break;
     }
