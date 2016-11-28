@@ -1,8 +1,15 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.neenbedankt.android-apt'
 
 android {
+
+    dataBinding {
+        enabled true
+    }
+
     compileSdkVersion 24
     buildToolsVersion "24.0.2"
+
     defaultConfig {
         applicationId "cn.qingchengfit.qcapp"
         minSdkVersion 15
@@ -11,6 +18,7 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -27,4 +35,6 @@ dependencies {
     compile 'com.android.support:appcompat-v7:24.2.1'
     testCompile 'junit:junit:4.12'
     compile project(':widgets')
+    compile "com.jakewharton:butterknife:8.4.0"
+    apt "com.jakewharton:butterknife-compiler:8.4.0"
 }
