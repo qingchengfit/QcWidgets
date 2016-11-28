@@ -1,5 +1,6 @@
 package cn.qingchengfit.widgets.utils;
 
+import android.util.Pair;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -74,6 +75,11 @@ public class DateUtils {
         StringBuffer stringBuffer = new StringBuffer();
         stringBuffer.append(dateArr[0]).append("T").append(dateArr[1]);
         return stringBuffer.toString();
+    }
+
+    public static String getChineseMonth(Date date){
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy年MM月", Locale.CHINA);
+        return formatter.format(date);
     }
 
     public static String formatToMMFromServer(String s) {
@@ -338,6 +344,21 @@ public class DateUtils {
         return c.get(Calendar.MONTH);
     }
 
+    /**
+     * 得到一周的开始时间和结束时间
+     * @param count
+     * @return
+     */
+    public static Pair<String,String> getWeek(int count){
+        Calendar s = Calendar.getInstance();
+        s.add(Calendar.DATE,count*7);
+        s.set(Calendar.DAY_OF_WEEK,Calendar.SUNDAY);
+        String start = Date2YYYYMMDD(s.getTime());
+        s.set(Calendar.DAY_OF_WEEK,Calendar.SATURDAY);
+        String end = Date2YYYYMMDD(s.getTime());
+        return new Pair<>(start,end);
+
+    }
 
     public static int dayNumFromToday(Date d) {
         return (int) ((getDayMid(d) - getDayMid(new Date())) / DAY_TIME);
