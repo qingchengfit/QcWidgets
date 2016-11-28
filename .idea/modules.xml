@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/QcApp.iml" filepath="$PROJECT_DIR$/QcApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/QcWidgets.iml" filepath="$PROJECT_DIR$/QcWidgets.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/qcmvplib/qcmvplib.iml" filepath="$PROJECT_DIR$/qcmvplib/qcmvplib.iml" />
       <module fileurl="file://$PROJECT_DIR$/widgets/widgets.iml" filepath="$PROJECT_DIR$/widgets/widgets.iml" />
