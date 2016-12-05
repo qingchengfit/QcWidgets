@@ -25,6 +25,7 @@
     <dimen name="qc_text_margin">8dp</dimen>
     <dimen name="qc_icon_size">16dp</dimen>
 
+    <dimen name="qc_divider_height">1px</dimen>
 
     <!-- dateTitleLayout -->
     <dimen name="dateTitleTextSize">18sp</dimen>

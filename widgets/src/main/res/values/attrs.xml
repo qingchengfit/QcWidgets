@@ -57,4 +57,11 @@
         <attr name="rn_bottom_padding" format="dimension"/>
         <attr name="rn_no_data_top" format="dimension"/>
     </declare-styleable>
+
+
+    <declare-styleable name="BezelImageView">
+        <attr name="maskDrawable" format="reference" />
+        <attr name="borderDrawable" format="reference" />
+        <attr name="desaturateOnPress" format="boolean" />
+    </declare-styleable>
 </resources>

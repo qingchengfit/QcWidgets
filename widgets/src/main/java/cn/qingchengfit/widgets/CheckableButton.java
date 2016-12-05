@@ -90,7 +90,7 @@ public class CheckableButton extends RelativeLayout {
                 , mTextSize);
 
         mCheckboxIconSelect = ta.getResourceId(R.styleable.CheckableButton_cb_hook_icon_select, R.drawable.checkbox_hook);
-        mCheckboxIconNormal = ta.getResourceId(R.styleable.CheckableButton_cb_hook_icon_normal, 0);
+        mCheckboxIconNormal = ta.getResourceId(R.styleable.CheckableButton_cb_hook_icon_normal, R.drawable.rect_trans);
 
         mBackgroundSelect = ta.getResourceId(R.styleable.CheckableButton_cb_background_select, R.drawable.qcw_shape_bgcenter_green);
         mBackgroundNormal = ta.getResourceId(R.styleable.CheckableButton_cb_background_normal, R.drawable.qcw_shape_bgcenter_white);
@@ -127,6 +127,7 @@ public class CheckableButton extends RelativeLayout {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 root.setBackgroundResource(checkBox.isChecked() ? mBackgroundSelect : mBackgroundNormal);
                 content.setTextColor(checkBox.isChecked() ? mTextColorSelect : mTextColorNormal);
+                checkBox.setButtonDrawable(checkBox.isChecked()? mCheckboxIconSelect:mCheckboxIconNormal);
             }
         });
         checkBox.setButtonDrawable(mCheckboxIconSelect);

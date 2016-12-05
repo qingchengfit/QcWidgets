@@ -4,7 +4,10 @@
     <color name="colorSetBg">#838B86</color>
     <color name="divider_white">#eeeeee</color>
     <color name="divider_grey">#dddddd</color>
+    <color name="text_black">#333333</color>
     <color name="text_grey">@color/warm_grey</color>
+    <color name="text_light">#ccc</color>
+
     <color name="bg_grey">#f4f4f4</color>
     <color name="toolbar">#4e4e4e</color>
     <color name="most_black">#222222</color>
@@ -14,7 +17,6 @@
     <!--common color-->
     <color name="white">#ffffff</color>
     <color name="half_white">#55ffffff</color>
-    <color name="text_black">#666666</color>
     <color name="dark_white">#cfcfcf</color>
     <color name="cyan">#00BFBF</color>
     <color name="transparent">#00ffffff</color>

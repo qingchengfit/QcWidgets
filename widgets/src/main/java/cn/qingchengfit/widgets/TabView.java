@@ -37,8 +37,8 @@ public class TabView extends LinearLayout implements View.OnClickListener {
     private OnItemIconTextSelectListener mListener;
 
     private int mTextSize = 12;
-    private int mTextColorSelect = 0xff45c01a;
-    private int mTextColorNormal = 0xff777777;
+    private int mTextColorSelect = 0x0db14b;
+    private int mTextColorNormal = 0xbbbbbb;
     private int mPadding = 10;
 
     public TabView(Context context) {
@@ -130,7 +130,7 @@ public class TabView extends LinearLayout implements View.OnClickListener {
     private void initItem() {
         for (int i = 0; i < mChildSize; i++) {
             TabItem tabItem = new TabItem(getContext());
-            LayoutParams params = new LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1);
+            LayoutParams params = new LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT, 1);
             tabItem.setPadding(mPadding, mPadding, mPadding, mPadding);
             tabItem.setIconText(mListener.onIconSelect(i), mListener.onTextSelect(i));
             tabItem.setTextSize(mTextSize);
