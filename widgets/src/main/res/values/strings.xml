@@ -13,5 +13,6 @@
     <string name="has_chosen">已选择</string>
     <string name="count_image">张照片</string>
     <string name="complete">完成</string>
+    <string name="please_choose">请选择</string>
 
 </resources>

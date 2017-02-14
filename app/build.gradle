@@ -36,7 +36,6 @@ dependencies {
     compile 'io.reactivex:rxandroid:1.2.1'
     compile 'io.reactivex:rxjava:1.1.6'
     compile 'com.tbruyelle.rxpermissions:rxpermissions:0.7.0@aar'
-
     testCompile 'junit:junit:4.12'
     compile project(':widgets')
     compile "com.jakewharton:butterknife:8.4.0"

@@ -23,6 +23,15 @@
         style="@style/Qc.TextCommonGrey"
         android:text="中国 +86"
     />
+    <TextView
+        android:id="@+id/nonull_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/red"
+        android:text=" *"
+        android:visibility="gone"
+        />
+
     <ImageView
         android:id="@+id/img_down"
         android:layout_width="16dp"

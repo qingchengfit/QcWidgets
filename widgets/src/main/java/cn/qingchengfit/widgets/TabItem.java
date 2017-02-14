@@ -12,6 +12,7 @@ import android.support.v7.widget.AppCompatDrawableManager;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
+import cn.qingchengfit.widgets.utils.MeasureUtils;
 
 /**
  * power by
@@ -226,7 +227,7 @@ public class TabItem extends View {
         float y = (mViewHeight + mIconNormal.getHeight() + mBoundText.height()) / 2.0F+5;
         canvas.drawText(mTextValue, x, y, mTextPaintNormal);
         canvas.drawText(mTextValue, x, y, mTextPaintSelect);
-        canvas.drawBitmap(mIconCircle, ((mViewWidth / 2) + (mIconNormal.getWidth() / 2)) + 5, y, mIconPaintCircle);
+        canvas.drawBitmap(mIconCircle, ((mViewWidth / 2) + (mIconNormal.getWidth() / 2)) + 5, MeasureUtils.dpToPx(5f,getResources()), mIconPaintCircle);
     }
 
     public void setTextSize(int textSize) {

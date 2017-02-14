@@ -53,7 +53,7 @@ public class DateUtils {
 
 
     public static boolean isOutOfDate(Date date) {
-        return date.getTime() < getDayMid(new Date());
+        return date.getTime() < getDayMidnight(new Date());
     }
 
     public static String DateToServer(Date date) {
@@ -195,6 +195,13 @@ public class DateUtils {
         Calendar c = Calendar.getInstance();
         c.setTime(d);
         c.add(Calendar.MONTH, i);
+        return c.getTime();
+    }
+
+  public static Date addDay(Date d, int i) {
+        Calendar c = Calendar.getInstance();
+        c.setTime(d);
+        c.add(Calendar.DATE, i);
         return c.getTime();
     }
 

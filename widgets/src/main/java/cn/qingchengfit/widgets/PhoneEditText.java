@@ -29,7 +29,9 @@ public class PhoneEditText extends LinearLayout implements View.OnClickListener,
     //1: china taiwan
     private int mDistrictInt = 0;
     private ImageView mLeftIcon;
-
+    private boolean noNull = false;
+    private TextView noNullTv;
+    private String hintStr;
     public PhoneEditText(Context context) {
         super(context);
         setOrientation(LinearLayout.HORIZONTAL);
@@ -63,6 +65,8 @@ public class PhoneEditText extends LinearLayout implements View.OnClickListener,
         final TypedArray a = getContext().obtainStyledAttributes(
                 attrs, R.styleable.PhoneEditText, defStyle, 0);
         showIcon = a.getBoolean(R.styleable.PhoneEditText_phone_show_icon, true);
+        noNull = a.getBoolean(R.styleable.PhoneEditText_phone_nonull,false);
+        hintStr = a.getString(R.styleable.PhoneEditText_phone_hint);
         a.recycle();
 
         if (isInEditMode()) {
@@ -78,6 +82,10 @@ public class PhoneEditText extends LinearLayout implements View.OnClickListener,
         mPhoneNum = (EditText) findViewById(R.id.et_phone);
         mDistrict = (TextView) findViewById(R.id.tv_distict);
         mLeftIcon = (ImageView) findViewById(R.id.left_icon);
+        if (!TextUtils.isEmpty(hintStr))
+            mPhoneNum.setHint(hintStr);
+        noNullTv = (TextView) findViewById(R.id.nonull_tv);
+        noNullTv.setVisibility(noNull?VISIBLE:GONE);
         findViewById(R.id.img_down).setOnClickListener(this);
         mDistrict.setOnClickListener(this);
         mLeftIcon.setVisibility(showIcon ? VISIBLE : GONE);

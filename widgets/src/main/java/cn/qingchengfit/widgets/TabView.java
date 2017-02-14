@@ -173,7 +173,7 @@ public class TabView extends LinearLayout implements View.OnClickListener {
      * @param isShow   true--show；false--dismiss
      */
     public void setPointStatu(int position, boolean isShow) {
-        if (position > 0 && position < mTabItems.size())
+        if (position >=0  && position < mTabItems.size())
             mTabItems.get(position).setPoint(isShow ? 1 : 0);
     }
 

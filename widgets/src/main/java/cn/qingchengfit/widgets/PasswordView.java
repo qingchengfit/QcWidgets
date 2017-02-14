@@ -28,7 +28,8 @@ public class PasswordView extends LinearLayout implements View.OnClickListener {
     private boolean mBlock = false;
     private OnClickListener mOnClickListener;
     private boolean isShowLeft = true;
-
+    private boolean noNull = false;
+    private TextView noNullTv;
 
     public PasswordView(Context context) {
         super(context);
@@ -64,6 +65,7 @@ public class PasswordView extends LinearLayout implements View.OnClickListener {
                 attrs, R.styleable.PasswordView, defStyle, 0);
         isPwMode = a.getBoolean(R.styleable.PasswordView_pw_mode, true);
         isShowLeft = a.getBoolean(R.styleable.PasswordView_pw_show_left, true);
+        noNull = a.getBoolean(R.styleable.PasswordView_pw_nonull,false);
         a.recycle();
 
         if (isInEditMode()) {
@@ -104,11 +106,13 @@ public class PasswordView extends LinearLayout implements View.OnClickListener {
         mNum = (EditText) findViewById(R.id.et_pw);
         mBtnGetCode = (TextView) findViewById(R.id.btn_getcode);
         mTvPw = (TextView) findViewById(R.id.tv_password);
+        noNullTv = (TextView) findViewById(R.id.nonull_tv);
         mOpenEye = (AnimatedButton) findViewById(R.id.open_eye);
         mBtnGetCode.setOnClickListener(this);
         mOpenEye.setChecked(false);
         mImgLeft.setVisibility(isShowLeft ? VISIBLE : GONE);
         mImgLeft.setImageResource(isPwMode?R.drawable.ic_login_password:R.drawable.ic_login_verifycode);
+        noNullTv.setVisibility(noNull?VISIBLE:GONE);
         if (isPwMode) {
             mBtnGetCode.setVisibility(GONE);
             mTvPw.setText(R.string.login_pw);

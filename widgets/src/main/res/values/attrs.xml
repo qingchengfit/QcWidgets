@@ -1,67 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--
+  <!--
 
-    attrs for pwview
-    -->
-    <declare-styleable name="PasswordView">
-        <attr name="pw_mode" format="boolean"/>
-        <attr name="pw_show_left" format="boolean"/>
-    </declare-styleable>
+  attrs for pwview
+  -->
+  <declare-styleable name="PasswordView">
+    <attr format="boolean" name="pw_mode"/>
+    <attr format="boolean" name="pw_show_left"/>
+    <attr format="boolean" name="pw_nonull"/>
+  </declare-styleable>
 
-    <declare-styleable name="AnimatedButton">
-        <attr name="ab_drawable_on" format="reference"/>
-        <attr name="ab_drawable_off" format="reference"/>
-        <attr name="ab_color" format="color"/>
-    </declare-styleable>
-
-
-    <declare-styleable name="PhoneEditText">
-        <attr name="phone_show_icon" format="boolean"/>
-        <attr name="phone_hint" format="string"/>
-    </declare-styleable>
+  <declare-styleable name="AnimatedButton">
+    <attr format="reference" name="ab_drawable_on"/>
+    <attr format="reference" name="ab_drawable_off"/>
+    <attr format="color" name="ab_color"/>
+  </declare-styleable>
 
 
-
-    <declare-styleable name="TabView">
-        <attr name="text_size" format="dimension"/>
-        <attr name="text_normal_color" format="color"/>
-        <attr name="text_select_color" format="color"/>
-        <attr name="item_padding" format="dimension"/>
-    </declare-styleable>
-
-    <declare-styleable name="CheckableButton">
-        <attr name="cb_text_size" format="dimension" />
-        <attr name="cb_text_normal_color" format="color" />
-        <attr name="cb_text_select_color" format="color" />
-        <attr name="cb_text_content" format="string" />
-        <attr name="cb_select" format="boolean" />
-        <attr name="cb_background_select" format="reference" />
-        <attr name="cb_background_normal" format="reference" />
-        <attr name="cb_hook_icon_select" format="reference" />
-        <attr name="cb_hook_icon_normal" format="reference" />
-    </declare-styleable>
+  <declare-styleable name="PhoneEditText">
+    <attr format="boolean" name="phone_show_icon"/>
+    <attr format="boolean" name="phone_nonull"/>
+    <attr format="string" name="phone_hint"/>
+  </declare-styleable>
 
 
-    <declare-styleable name="ExpandedLayout">
-        <attr name="el_expanded" format="boolean"/>
-        <attr name="el_label" format="string"/>
-    </declare-styleable>
+  <declare-styleable name="TabView">
+    <attr format="dimension" name="text_size"/>
+    <attr format="color" name="text_normal_color"/>
+    <attr format="color" name="text_select_color"/>
+    <attr format="dimension" name="item_padding"/>
+  </declare-styleable>
+
+  <declare-styleable name="CheckableButton">
+    <attr format="dimension" name="cb_text_size"/>
+    <attr format="color" name="cb_text_normal_color"/>
+    <attr format="color" name="cb_text_select_color"/>
+    <attr format="string" name="cb_text_content"/>
+    <attr format="boolean" name="cb_select"/>
+    <attr format="reference" name="cb_background_select"/>
+    <attr format="reference" name="cb_background_normal"/>
+    <attr format="reference" name="cb_hook_icon_select"/>
+    <attr format="reference" name="cb_hook_icon_normal"/>
+    <attr format="string" name="cb_hook_icon_location"/>
+
+  </declare-styleable>
 
 
-
-    <declare-styleable name="RecycleNoImg">
-        <attr name="rn_drawable" format="reference"/>
-        <attr name="rn_hint" format="string"/>
-        <attr name="rn_color" format="color"/>
-        <attr name="rn_bottom_padding" format="dimension"/>
-        <attr name="rn_no_data_top" format="dimension"/>
-    </declare-styleable>
+  <declare-styleable name="ExpandedLayout">
+    <attr format="boolean" name="el_expanded"/>
+    <attr format="string" name="el_label"/>
+  </declare-styleable>
 
 
-    <declare-styleable name="BezelImageView">
-        <attr name="maskDrawable" format="reference" />
-        <attr name="borderDrawable" format="reference" />
-        <attr name="desaturateOnPress" format="boolean" />
-    </declare-styleable>
+  <declare-styleable name="RecycleNoImg">
+    <attr format="reference" name="rn_drawable"/>
+    <attr format="string" name="rn_hint"/>
+    <attr format="color" name="rn_color"/>
+    <attr format="dimension" name="rn_bottom_padding"/>
+    <attr format="dimension" name="rn_no_data_top"/>
+  </declare-styleable>
+
+
+  <declare-styleable name="BezelImageView">
+    <attr format="reference" name="maskDrawable"/>
+    <attr format="reference" name="borderDrawable"/>
+    <attr format="boolean" name="desaturateOnPress"/>
+  </declare-styleable>
+
+  <declare-styleable name="ConnerTag" >
+    <attr format="string" name="text"/>
+    <attr format="color" name="bg_color"/>
+    <attr format="dimension" name="radius"/>
+  </declare-styleable>
 </resources>

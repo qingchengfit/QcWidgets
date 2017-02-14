@@ -3,6 +3,7 @@ package cn.qingchengfit.widgets;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.CheckBox;
@@ -47,6 +48,7 @@ public class CheckableButton extends RelativeLayout {
 
     private CompoundButton.OnCheckedChangeListener mListener ;
 
+    private String mHookIconLocation = "";
 
 
     public CheckableButton(Context context) {
@@ -96,9 +98,16 @@ public class CheckableButton extends RelativeLayout {
         mBackgroundNormal = ta.getResourceId(R.styleable.CheckableButton_cb_background_normal, R.drawable.qcw_shape_bgcenter_white);
 
         mContent = ta.getString(R.styleable.CheckableButton_cb_text_content);
+        mHookIconLocation = ta.getString(R.styleable.CheckableButton_cb_hook_icon_location);
 
         isChecked = ta.getBoolean(R.styleable.CheckableButton_cb_select, false);
         ta.recycle();
+
+        if (TextUtils.isEmpty(mHookIconLocation) || "riht".equals(mHookIconLocation)) {
+            inflate(context, R.layout.qcw_layout_checkable_button, this);
+        } else if ("left".equals(mHookIconLocation)) {
+            inflate(context, R.layout.qcw_layout_checkable_button_left, this);
+        }
     }
 
     @Override
@@ -133,6 +142,14 @@ public class CheckableButton extends RelativeLayout {
         checkBox.setButtonDrawable(mCheckboxIconSelect);
         root.setBackgroundResource(isChecked ? mBackgroundSelect : mBackgroundNormal);
         content.setTextColor(isChecked ? mTextColorSelect : mTextColorNormal);
+        LayoutParams params = (LayoutParams) checkBox.getLayoutParams();
+        if (TextUtils.isEmpty(mHookIconLocation) || "right".equals(mHookIconLocation)) {
+            params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+        } else if ("left".equals(mHookIconLocation)) {
+            params.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+        }
+        checkBox.setLayoutParams(params);
+
     }
 
 

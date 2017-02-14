@@ -6,64 +6,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="cn.qingchengfit.qcapp.MainActivity"
     >
+    <android.support.v7.widget.RecyclerView
 
-  <TextView
+        android:id="@+id/recycleview"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        />
+    <cn.qingchengfit.widgets.ConnerTag
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:bg_color="@color/blue"
+        app:text="hahaha"
+        app:radius="10dp"
+        />
 
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:text="Hello World!"
-      />
 
-  <cn.qingchengfit.widgets.CheckableButton
-      android:id="@+id/btn1"
-      android:layout_width="80dp"
-      android:layout_height="39dp"
-      app:cb_select="false"
-      app:cb_text_content="测试"
-      />
-
-  <cn.qingchengfit.widgets.CheckableButton
-      android:id="@+id/btn2"
-      android:layout_width="80dp"
-      android:layout_height="39dp"
-      app:cb_select="true"
-      app:cb_text_content="测试"
-      />
-
-  <cn.qingchengfit.widgets.PhoneEditText
-      android:layout_width="match_parent"
-      android:layout_height="40dp"
-      />
-
-  <cn.qingchengfit.widgets.PasswordView
-      android:layout_width="match_parent"
-      android:layout_height="40dp"
-      app:pw_mode="true"
-      />
-
-  <cn.qingchengfit.widgets.PasswordView
-      android:layout_width="match_parent"
-      android:layout_height="40dp"
-      app:pw_mode="false"
-      />
-
-  <Button
-      android:id="@+id/guide_window"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:text="guide window"
-      />
-  <Button
-      android:id="@+id/choose_image"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:text="选择图片"
-      />
 
 </LinearLayout>

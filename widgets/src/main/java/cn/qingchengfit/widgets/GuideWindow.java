@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import cn.qingchengfit.widgets.utils.MeasureUtils;
 
 /**
  * //  ┏┓　　　┏┓
@@ -69,11 +70,27 @@ public class GuideWindow {
         break;
     }
     popupWindow.setOutsideTouchable(false);
-    popupWindow.setFocusable(true);
+    popupWindow.setFocusable(false);
+  }
+
+  public boolean isShowing(){
+    if (popupWindow == null){
+      return false;
+    }else {
+      return popupWindow.isShowing();
+    }
+
+  }
+
+  public void dismiss(){
+    if (popupWindow != null && popupWindow.isShowing()){
+      popupWindow.dismiss();
+    }
   }
 
   public void show(View view) {
     int vh = view.getMeasuredHeight();
+    int vw = view.getMeasuredWidth();
     switch (location) {
       case DOWN:
         DisplayMetrics dm = context.getResources().getDisplayMetrics();
@@ -87,9 +104,8 @@ public class GuideWindow {
         popview.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
         int popupWidth = popview.getMeasuredWidth();
         int popupHeight = popview.getMeasuredHeight();
-        int x = popupWidth - 210 + (vh / 2 - 105);
-        popupWindow.showAsDropDown(view, -x, -(popupHeight + vh));
-
+        int x = -popupWidth + vw/2+ MeasureUtils.dpToPx(45f,context.getResources());
+        popupWindow.showAsDropDown(view, x, -(popupHeight + vh));
         break;
     }
   }

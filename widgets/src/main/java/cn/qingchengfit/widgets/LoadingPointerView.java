@@ -66,7 +66,7 @@ public class LoadingPointerView extends View {
         int bigR =  MeasureUtils.dpToPx(5f,getResources());
         int minR =  MeasureUtils.dpToPx(1.5f,getResources());
         int pointLen = width/2- MeasureUtils.dpToPx(15f,getResources());
-        path.moveTo(heigt / 2 - bigR, heigt / 2);
+        path.moveTo(width / 2 - bigR, heigt / 2);
         path.lineTo(width / 2 + bigR, heigt / 2);
         path.lineTo(width / 2 + minR, heigt / 2 - pointLen);
         path.lineTo(width / 2 - minR, heigt / 2 - pointLen);
