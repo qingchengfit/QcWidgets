@@ -5,8 +5,9 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="cn.qingchengfit.qcapp.MainActivity"
-    app:layout_collapseParallaxMultiplier="0.5" app:layout_collapseMode="parallax" android:orientation="vertical">
+    app:layout_collapseParallaxMultiplier="0.5" app:layout_collapseMode="parallax">
     <android.support.v7.widget.RecyclerView
 
         android:id="@+id/recycleview"
@@ -21,11 +22,9 @@
         app:radius="10dp"
         />
     <Button
-        android:text="@string/button"
+        android:text="Button"
         android:layout_width="121dp"
-        android:layout_height="58dp" android:id="@+id/button"
-
-    />
+        android:layout_height="58dp" android:id="@+id/button" android:elevation="15dp"/>
 
 
 </LinearLayout>

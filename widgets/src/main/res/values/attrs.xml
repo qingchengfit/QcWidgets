@@ -49,6 +49,7 @@
   <declare-styleable name="ExpandedLayout">
     <attr format="boolean" name="el_expanded"/>
     <attr format="string" name="el_label"/>
+    <attr format="reference" name="el_left_icon"/>
   </declare-styleable>
 
 

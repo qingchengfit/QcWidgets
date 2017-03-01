@@ -62,7 +62,7 @@ public class ConnerTag extends View {
 
 
     private void init(AttributeSet attrs, int defStyle) {
-
+        isInEditMode();
         final TypedArray a = getContext().obtainStyledAttributes(
             attrs, R.styleable.ConnerTag, defStyle, 0);
         mRaduim = a.getDimension(R.styleable.ConnerTag_radius,8f);

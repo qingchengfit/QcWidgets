@@ -53,6 +53,7 @@ public class AlphabetView extends LinearLayout {
     }
 
     private void init() {
+        isInEditMode();
         this.setOrientation(VERTICAL);
         this.setBackgroundResource(R.color.transparent);
         requestDisallowInterceptTouchEvent(true);

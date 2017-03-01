@@ -3,20 +3,18 @@ package cn.qingchengfit.widgets;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
 import android.os.Handler;
+import android.support.annotation.DrawableRes;
 import android.support.v7.widget.SwitchCompat;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.Transformation;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import cn.qingchengfit.widgets.utils.MeasureUtils;
-
 
 /**
  * power by
@@ -43,6 +41,7 @@ public class ExpandedLayout extends LinearLayout {
     TextView mTvLable;
     SwitchCompat mSwitcher;
     private boolean isExpanded;
+    ImageView leftImage;
     private String label;
     // The height of the content when collapsed
     private int mCollapsedHeight = 0;
@@ -53,7 +52,7 @@ public class ExpandedLayout extends LinearLayout {
 
     private CompoundButton.OnCheckedChangeListener mOtherListenr;
 
-
+    private Drawable leftDrawable;
     Handler mHandler;
 
     public ExpandedLayout(Context context) {
@@ -77,7 +76,7 @@ public class ExpandedLayout extends LinearLayout {
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.ExpandedLayout);
         isExpanded = ta.getBoolean(R.styleable.ExpandedLayout_el_expanded, false);
         label = ta.getString(R.styleable.ExpandedLayout_el_label);
-
+        leftDrawable = ta.getDrawable(R.styleable.ExpandedLayout_el_left_icon);
         ta.recycle();
 
     }
@@ -93,9 +92,9 @@ public class ExpandedLayout extends LinearLayout {
             isExpanded = b;
             if (mOtherListenr != null)
                 mOtherListenr.onCheckedChanged(compoundButton,b);
-
+            if (mContent == null)
+                return;
             if (b) {
-//                a = new ExpandAnimation(mCollapsedHeight, mContentHeight);
                 final ValueAnimator valueAnimator = ValueAnimator.ofInt(mCollapsedHeight, mContentHeight);
                 valueAnimator.setDuration(mAnimationDuration);
 
@@ -110,9 +109,7 @@ public class ExpandedLayout extends LinearLayout {
                 });
 
                 valueAnimator.start();
-//                mListener.onCollapse(mHandle, mContent);
             } else {
-//                a = new ExpandAnimation(mContentHeight, mCollapsedHeight);
                 final ValueAnimator valueAnimator = ValueAnimator.ofInt(mContentHeight, mCollapsedHeight);
                 valueAnimator.setDuration(mAnimationDuration);
 
@@ -126,75 +123,11 @@ public class ExpandedLayout extends LinearLayout {
                     }
                 });
                 valueAnimator.start();
-//                mListener.onExpand(mHandle, mContent);
+                //                mListener.onExpand(mHandle, mContent);
             }
-//            a.setDuration(mAnimationDuration);
-//            a.setInterpolator(new DecelerateInterpolator());
-//            a.setAnimationListener(new Animation.AnimationListener() {
-//                @Override
-//                public void onAnimationStart(Animation animation) {
-//                    if (b) {
-//                        ViewGroup.LayoutParams params = mContent.getLayoutParams();
-//                        params.height = 0;
-//                        mContent.setLayoutParams(params);
-//                        mContent.setVisibility(VISIBLE);
-//
-//                    }
-//                }
-//
-//                @Override
-//                public void onAnimationEnd(Animation animation) {
-//                    if (!b) {
-//                        ViewGroup.LayoutParams params = mContent.getLayoutParams();
-//                        params.height = 0;
-//                        mContent.setLayoutParams(params);
-//                        mContent.setVisibility(GONE);
-//                    }
-//                }
-//
-//                @Override
-//                public void onAnimationRepeat(Animation animation) {
-//
-//                }
-//            });
-//            mContent.startAnimation(a);
-
-//            ViewCompat.setPivotY(mChildView, 0);
-//            if (b) {
-//
-//                ViewCompat.animate(mChildView)
-//                        .scaleY(1)
-//                        .setDuration(300)
-//                        .setInterpolator(new DecelerateInterpolator())
-//                        .start();
-//
-//
-//            } else {
-//                ViewCompat.animate(mChildView)
-//                        .scaleY(0)
-//                        .setDuration(300)
-//                        .setInterpolator(new DecelerateInterpolator())
-//                        .start();
-//
-//            }
-//            mChildView.invalidate();
-//            mChildView.requestLayout();
-//            requestLayout();
         }
     };
 
-//    @Override
-//    protected void onLayout(boolean changed, int l, int t, int r, int b) {
-//        if(changed){
-//            mHandler.post(new Runnable() {
-//                @Override
-//                public void run() {
-//                    requestLayout();
-//                }
-//            });
-//        }
-//        super.onLayout(changed, l, t, r, b);
-//    }
 
 
     @Override
@@ -204,23 +137,25 @@ public class ExpandedLayout extends LinearLayout {
         View view = inflate(getContext(), R.layout.layout_expandedlayout, null);
         mTvLable = (TextView) view.findViewById(R.id.label);
         mSwitcher = (SwitchCompat) view.findViewById(R.id.switcher);
-
+        leftImage = (ImageView)view.findViewById(R.id.left_icon);
         mSwitcher.setChecked(isExpanded);
         mTvLable.setText(label);
-
+        leftImage.setImageDrawable(leftDrawable);
 
         LayoutParams layoutParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, MeasureUtils.dpToPx(40f, getResources()));
         addView(view, 0, layoutParams);
         mContent = getChildAt(1);
 
-//        ViewCompat.setScaleY(mChildView,isExpanded?1:0);
+        //        ViewCompat.setScaleY(mChildView,isExpanded?1:0);
 
         // This changes the height of the content such that it
         // starts off collapsed
-        ViewGroup.LayoutParams lp =
+        if (mContent != null) {
+            android.view.ViewGroup.LayoutParams lp =
                 mContent.getLayoutParams();
-        lp.height = mCollapsedHeight;
-        mContent.setLayoutParams(lp);
+            lp.height = isExpanded ? mContentHeight : mCollapsedHeight;
+            mContent.setLayoutParams(lp);
+        }
         mSwitcher.setOnCheckedChangeListener(listener);
     }
 
@@ -232,57 +167,27 @@ public class ExpandedLayout extends LinearLayout {
      */
     @Override
     protected void onMeasure(int widthMeasureSpec,
-                             int heightMeasureSpec) {
+        int heightMeasureSpec) {
 
         // First, measure how high content wants to be
-        mContent.measure(widthMeasureSpec, MeasureSpec.UNSPECIFIED);
-        mContentHeight = mContent.getMeasuredHeight();
-        Log.v("cHeight", mContentHeight + "");
-        Log.v("cCollapseHeight", mCollapsedHeight + "");
-
-//        if (mContentHeight <= mCollapsedHeight) {
-//            mContent.setVisibility(GONE);
-//        } else {
-//            mContent.setVisibility(VISIBLE);
-//        }
+        if (mContent != null) {
+            mContent.measure(widthMeasureSpec, MeasureSpec.UNSPECIFIED);
+            mContentHeight = mContent.getMeasuredHeight();
+        }
         // Then let the usual thing happen
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
     }
 
 
-    /**
-     * This is a private animation class that handles the expand/collapse
-     * animations. It uses the animationDuration attribute for the length
-     * of time it takes.
-     */
-    private class ExpandAnimation extends Animation {
-        private final int mStartHeight;
-        private final int mDeltaHeight;
-
-        public ExpandAnimation(int startHeight, int endHeight) {
-            mStartHeight = startHeight;
-            mDeltaHeight = endHeight - startHeight;
-        }
-
-
-        @Override
-        protected void applyTransformation(float interpolatedTime,
-                                           Transformation t) {
-            ViewGroup.LayoutParams lp =
-                    mContent.getLayoutParams();
-            lp.height = (int) (mStartHeight + mDeltaHeight *
-                    interpolatedTime);
-
-            mContent.setLayoutParams(lp);
-            mContent.requestLayout();
-        }
-
-        @Override
-        public boolean willChangeBounds() {
-            return true;
+    public void setLeftDrawable(@DrawableRes int resInt, int width,int height){
+        if (leftImage != null){
+            leftImage.setImageResource(resInt);
+            leftImage.getLayoutParams().width = width;
+            leftImage.getLayoutParams().height = height;
         }
     }
+
 
 
     public boolean isExpanded() {

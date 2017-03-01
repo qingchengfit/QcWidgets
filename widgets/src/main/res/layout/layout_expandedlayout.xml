@@ -11,10 +11,25 @@
     <TextView
         android:id="@+id/label"
         style="@style/Qc.TextCommonBlack"
-        android:layout_width="0dp"
-        android:layout_weight="1"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:text="青城卡"
+        />
+    <Space
+        android:layout_width="5dp"
+        android:layout_height="match_parent"
+        />
+    <ImageView
+        android:id="@+id/left_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        android:maxHeight="12dp"
+        />
+    <Space
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
         />
     <android.support.v7.widget.SwitchCompat
         android:id="@+id/switcher"

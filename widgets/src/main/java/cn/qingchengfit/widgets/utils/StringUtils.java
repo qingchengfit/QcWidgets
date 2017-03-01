@@ -1,10 +1,12 @@
 package cn.qingchengfit.widgets.utils;
 
-import android.text.TextUtils;
-
+import android.support.annotation.NonNull;
+import cn.qingchengfit.widgets.Constant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+
+import static android.text.TextUtils.concat;
 
 /**
  * power by
@@ -65,8 +67,8 @@ public class StringUtils {
             return null;
         for (int i = 0; i < stringList.size(); i++) {
             if (i < stringList.size() - 1)
-                ret = TextUtils.concat(ret, stringList.get(i), ",").toString();
-            else ret = TextUtils.concat(ret, stringList.get(i)).toString();
+                ret = concat(ret, stringList.get(i), ",").toString();
+            else ret = concat(ret, stringList.get(i)).toString();
         }
         return ret;
     }
@@ -84,7 +86,17 @@ public class StringUtils {
             ret.add(s);
         }
         return ret;
+    }
 
+    public static String concactStrWithSeparate(@NonNull String... s){
+        String ret = "";
+        for (int i = 0; i < s.length; i++) {
+            ret = ret.concat(s[i]);
+            if (i < s.length -1){
+                ret = ret.concat(Constant.SEPARATE);
+            }
+        }
+        return ret;
     }
 
 
