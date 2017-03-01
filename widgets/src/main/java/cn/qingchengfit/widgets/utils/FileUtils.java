@@ -40,12 +40,32 @@ public class FileUtils {
         if (context.getExternalCacheDir() != null) {
             String path = context.getExternalCacheDir().getAbsolutePath();
 
-            file = new File(path + File.separator + "tmp_img");
+            file = new File(path + File.separator + "tmp_img.png");
 
         } else {
-            file = new File(context.getCacheDir().getAbsolutePath() + File.separator + "tmp_img");
+            file = new File(context.getCacheDir().getAbsolutePath() + File.separator + "tmp_img.png");
         }
+        if (!file.exists()) try {
+            file.createNewFile();
+        } catch (IOException e) {
+        }
+        return file;
+    }
+    public static File getTmpImageFile(Context context,String plus) {
+        File file;
+        if (context.getExternalCacheDir() != null) {
+            //String path = context.getExternalCacheDir().getAbsolutePath();
+            String path = context.getExternalFilesDir(Environment.DIRECTORY_DCIM).getAbsolutePath();
 
+            file = new File(path + File.separator + "tmp_img"+plus+".png");
+        } else {
+            //file = new File(context.getCacheDir().getAbsolutePath() + File.separator + "tmp_img"+plus+".png");
+            file = new File(context.getDir(Environment.DIRECTORY_DOWNLOADS,Context.MODE_APPEND).getAbsolutePath() + File.separator + "tmp_img"+plus+".png");
+        }
+        if (!file.exists()) try {
+            file.createNewFile();
+        } catch (IOException e) {
+        }
         return file;
     }
     public static File getFileFromBytes(byte[] b, String outputFile) {

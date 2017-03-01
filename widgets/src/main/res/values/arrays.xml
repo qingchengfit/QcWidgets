@@ -2,6 +2,6 @@
 <resources>
     <string-array name="country_and_districion_list">
         <item>中国  +86</item>
-        <item>台湾  +886</item>
+        <item>中国台湾  +886</item>
     </string-array>
 </resources>

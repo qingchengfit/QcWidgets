@@ -1,6 +1,5 @@
 package cn.qingchengfit.widgets;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -8,12 +7,12 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.VectorDrawable;
-import android.os.Build;
-import android.support.v4.content.ContextCompat;
+import android.support.graphics.drawable.VectorDrawableCompat;
+import android.support.v7.widget.AppCompatDrawableManager;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
+import cn.qingchengfit.widgets.utils.MeasureUtils;
 
 /**
  * power by
@@ -94,11 +93,16 @@ public class TabItem extends View {
      * @return bitmap
      */
     private static Bitmap getBitmap(Context context, int drawableId) {
-        Drawable drawable = ContextCompat.getDrawable(context, drawableId);
+        final AppCompatDrawableManager drawableManager = AppCompatDrawableManager.get();
+        Drawable drawable = drawableManager.getDrawable(context, drawableId);
         if (drawable instanceof BitmapDrawable) {
             return ((BitmapDrawable) drawable).getBitmap();
-        } else if (drawable instanceof VectorDrawable) {
-            return getBitmap(drawable);
+        } else if (drawable instanceof VectorDrawableCompat ){
+            Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+            Canvas canvas = new Canvas(bitmap);
+            drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+            drawable.draw(canvas);
+            return bitmap;
         } else {
             try {
                 return getBitmap(drawable);
@@ -108,13 +112,15 @@ public class TabItem extends View {
         }
     }
 
+
+
     /**
      * vectorDrawable to bitmap
      *
      * @param vectorDrawable vectorDrawable
      * @return bitmap
      */
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    //@TargetApi(Build.VERSION_CODES.LOLLIPOP)
     private static Bitmap getBitmap(Drawable vectorDrawable) {
         Bitmap bitmap = Bitmap.createBitmap(vectorDrawable.getIntrinsicWidth(),
                 vectorDrawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
@@ -217,11 +223,11 @@ public class TabItem extends View {
 
     /*画字体*/
     private void drawText(Canvas canvas) {
-        float x = (mViewWidth - mBoundText.width()) / 2.0f;
-        float y = (mViewHeight + mIconNormal.getHeight() + mBoundText.height()) / 2.0F;
+        float x = (mViewWidth - mBoundText.width()) / 2.0f-5;
+        float y = (mViewHeight + mIconNormal.getHeight() + mBoundText.height()) / 2.0F+5;
         canvas.drawText(mTextValue, x, y, mTextPaintNormal);
         canvas.drawText(mTextValue, x, y, mTextPaintSelect);
-        canvas.drawBitmap(mIconCircle, ((mViewWidth / 2) + (mIconNormal.getWidth() / 2)) + 5, y, mIconPaintCircle);
+        canvas.drawBitmap(mIconCircle, ((mViewWidth / 2) + (mIconNormal.getWidth() / 2)) + 5, MeasureUtils.dpToPx(5f,getResources()), mIconPaintCircle);
     }
 
     public void setTextSize(int textSize) {

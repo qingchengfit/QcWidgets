@@ -6,6 +6,7 @@ import android.os.Build;
 import android.support.annotation.ColorRes;
 import android.view.View;
 import android.view.ViewTreeObserver;
+import android.widget.TextView;
 
 /**
  * Created by peggy on 16/5/24.
@@ -37,6 +38,15 @@ public class CompatUtils {
         }
 
     }
+    public static void setCompoundDrawables(TextView view,Drawable left,Drawable top,Drawable right,Drawable bottom){
+        if (Build.VERSION.SDK_INT >= 17) {
+            view.setCompoundDrawablesRelative(left,top,right,bottom);
+        }else {
+            view.setCompoundDrawablesWithIntrinsicBounds(left,top,right,bottom);
+        }
+    }
+
+
 
 
 }
