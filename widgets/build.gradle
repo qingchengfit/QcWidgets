@@ -51,7 +51,7 @@ uploadArchives{
     }
     repositories {
         mavenDeployer {
-            repository(url: uri('../../StaffKit/repo'))
+            repository(url: uri('../../android-fitstaff/repo'))
             pom.artifactId = 'widgets'
 
         }

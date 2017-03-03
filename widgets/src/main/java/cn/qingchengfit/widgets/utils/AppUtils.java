@@ -2,11 +2,14 @@ package cn.qingchengfit.widgets.utils;
 
 import android.app.Activity;
 import android.app.ActivityManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.telephony.PhoneNumberUtils;
+import android.telephony.SmsManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -87,6 +90,16 @@ public class AppUtils {
         }
         return false;
     }
+
+    public void doSendSMSTo(Context context, String phoneNumber, String message){
+        if(PhoneNumberUtils.isGlobalPhoneNumber(phoneNumber)){
+            Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.parse("smsto:"+phoneNumber));
+            intent.putExtra("sms_body", message);
+            context.startActivity(intent);
+        }
+    }
+
+
 
 
     /**
