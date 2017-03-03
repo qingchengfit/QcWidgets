@@ -91,7 +91,7 @@ public class AppUtils {
         return false;
     }
 
-    public void doSendSMSTo(Context context, String phoneNumber){
+    public static void doSendSMSTo(Context context, String phoneNumber){
         if(PhoneNumberUtils.isGlobalPhoneNumber(phoneNumber)){
             Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.parse("smsto:"+phoneNumber));
             context.startActivity(intent);
