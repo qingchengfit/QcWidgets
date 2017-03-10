@@ -2,13 +2,19 @@ package cn.qingchengfit.widgets;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.os.Handler;
+import android.support.annotation.IntDef;
 import android.support.v4.view.MotionEventCompat;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.MotionEvent;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 
 /**
  * power by
@@ -24,6 +30,8 @@ import android.widget.TextView;
  * Created by Paper on 15/10/20 2015.
  */
 public class AlphabetView extends LinearLayout {
+    private TextView alphaDialog;
+
     public static String[] alphabetStrings = new String[]{
             "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V"
             , "W", "X", "Y", "Z", "#"
@@ -53,7 +61,6 @@ public class AlphabetView extends LinearLayout {
     }
 
     private void init() {
-        isInEditMode();
         this.setOrientation(VERTICAL);
         this.setBackgroundResource(R.color.transparent);
         requestDisallowInterceptTouchEvent(true);
@@ -81,6 +88,10 @@ public class AlphabetView extends LinearLayout {
         cellHeight = height / alphabetStrings.length;
     }
 
+    public void setAlphaDialog(TextView alphaDialog) {
+        this.alphaDialog = alphaDialog;
+    }
+
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
         return true;
@@ -92,6 +103,7 @@ public class AlphabetView extends LinearLayout {
         float y = event.getY() - getPaddingTop();
         switch (MotionEventCompat.getActionMasked(event)) {
             case MotionEvent.ACTION_DOWN:
+//                onAlphabetChange.isShowTialog(GONE, "");
 //                return true;
 //            case MotionEvent.ACTION_UP:
             case MotionEvent.ACTION_MOVE:
@@ -100,8 +112,24 @@ public class AlphabetView extends LinearLayout {
                     position = 0;
                 if (position < alphabetStrings.length && onAlphabetChange != null) {
                     onAlphabetChange.onChange(position, alphabetStrings[position]);
+                    if (alphaDialog != null) {
+                        alphaDialog.setVisibility(VISIBLE);
+                        alphaDialog.setText(alphabetStrings[position]);
+                    }
                 }
-                return true;
+
+            case MotionEvent.ACTION_UP:
+                if (alphaDialog != null) {
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            alphaDialog.setVisibility(GONE);
+
+                        }
+                    }, 300);
+                }
+
+            default:
         }
 
 
@@ -113,4 +141,8 @@ public class AlphabetView extends LinearLayout {
         void onChange(int position, String s);
     }
 
+    @IntDef({View.VISIBLE, View.GONE})
+    @Retention(RetentionPolicy.RUNTIME)
+    public @interface DialogState {
+    }
 }
