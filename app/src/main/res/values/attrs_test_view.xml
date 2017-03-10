@@ -1,5 +1,5 @@
 <resources>
-  <declare-styleable name="MyView">
+  <declare-styleable name="TestView">
     <attr format="string" name="exampleString"/>
     <attr format="dimension" name="exampleDimension"/>
     <attr format="color" name="exampleColor"/>
