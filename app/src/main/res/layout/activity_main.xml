@@ -6,18 +6,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="cn.qingchengfit.qcapp.MainActivity"
-    app:layout_collapseParallaxMultiplier="0.5" app:layout_collapseMode="parallax" android:orientation="vertical">
+    app:layout_collapseParallaxMultiplier="0.5" app:layout_collapseMode="parallax"
+              android:orientation="vertical"
+    >
+
     <android.support.v7.widget.RecyclerView
 
         android:id="@+id/recycleview"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         />
+
     <cn.qingchengfit.widgets.ConnerTag
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:background="@color/green"
         app:bg_color="@color/blue"
-        app:text="hahaha"
+        app:text="已停卡"
         app:radius="10dp"
         />
     <Button

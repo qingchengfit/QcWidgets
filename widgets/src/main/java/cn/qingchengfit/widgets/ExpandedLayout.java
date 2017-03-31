@@ -14,7 +14,7 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import cn.qingchengfit.widgets.utils.MeasureUtils;
+import cn.qingchengfit.utils.MeasureUtils;
 
 /**
  * power by

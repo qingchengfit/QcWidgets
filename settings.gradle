@@ -1,1 +1,1 @@
-include  ':widgets', ':qcmvplib'
+include  ':app',':widgets', ':qcmvplib'

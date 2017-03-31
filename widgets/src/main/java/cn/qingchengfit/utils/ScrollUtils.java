@@ -1,4 +1,4 @@
-package cn.qingchengfit.widgets.utils;
+package cn.qingchengfit.utils;
 
 import android.support.v4.view.ViewCompat;
 import android.view.View;

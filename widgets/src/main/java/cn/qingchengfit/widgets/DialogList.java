@@ -17,7 +17,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.qingchengfit.widgets.utils.MeasureUtils;
+import cn.qingchengfit.utils.MeasureUtils;
 
 
 /**

@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.PopupWindow;
 import android.widget.TextView;
-import cn.qingchengfit.widgets.utils.MeasureUtils;
+import cn.qingchengfit.utils.MeasureUtils;
 
 /**
  * //  ┏┓　　　┏┓

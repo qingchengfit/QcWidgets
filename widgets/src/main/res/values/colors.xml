@@ -5,13 +5,18 @@
     <color name="divider_white">#eeeeee</color>
     <color name="divider_grey">#dddddd</color>
     <color name="text_black">#333333</color>
-    <color name="text_grey">@color/warm_grey</color>
     <color name="text_light">#ccc</color>
 
     <color name="bg_grey">#f4f4f4</color>
     <color name="toolbar">#4e4e4e</color>
     <color name="most_black">#222222</color>
+    <color name="bg_white">#ffffff</color>
 
+
+    <color name="text_dark">#333333</color>
+    <color name="text_warm">#888888</color>
+    <color name="text_grey">#bbbbbb</color>
+    <color name="text_hint">#cccccc</color>
 
 
     <!--common color-->
@@ -49,5 +54,34 @@
     <color name="qc_student_status_2">#0Db14b</color>
 
     <color name="grey_student_info">#777777</color>
+
+
+
+    <color name="reddish_orange">#f9601e</color>
+    <color name="orange_yellow">#fc9e00</color>
+    <color name="golden_yellow">#fbc822</color>
+    <color name="turquoise_blue">#01a6be</color>
+    <color name="seafoam_blue">#70cbd8</color>
+    <color name="light_teal">#84d7e3</color>
+    <color name="azure">#08a5f0</color>
+    <color name="lightblue">#53c2f0</color>
+    <color name="lightblue_two">#90d2ee</color>
+    <color name="iris">#5061c8</color>
+    <color name="perrywinkle">#8a95d9</color>
+    <color name="light_blue_grey">#b7beec</color>
+
+
+    <color name="pinkish_grey">#bbbbbb</color>
+    <color name="warm_grey_2">#888888</color>
+
+    <color name="greyish_brown">#555555</color>
+
+    <color name="grey_blue">#6a7fa4</color>
+
+    <color name="pinkish_grey_two">#cccccc</color>
+    <color name="white_three">#ffffff</color>
+    <color name="pastel_red">#ea6161</color>
+    <color name="white_two">#f4f4f4</color>
+    <color name="shamrock_green">#0db14b</color>
 
 </resources>

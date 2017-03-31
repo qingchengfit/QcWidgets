@@ -1,4 +1,4 @@
-package cn.qingchengfit.widgets.utils;
+package cn.qingchengfit.utils;
 
 import android.annotation.TargetApi;
 import android.content.ContentUris;

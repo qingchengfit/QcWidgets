@@ -12,7 +12,7 @@ import android.support.v7.widget.AppCompatDrawableManager;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
-import cn.qingchengfit.widgets.utils.MeasureUtils;
+import cn.qingchengfit.utils.MeasureUtils;
 
 /**
  * power by

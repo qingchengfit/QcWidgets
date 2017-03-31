@@ -17,7 +17,7 @@ import android.support.v7.widget.AppCompatImageButton;
 import android.support.v7.widget.TintTypedArray;
 import android.util.AttributeSet;
 
-import cn.qingchengfit.widgets.utils.CompatUtils;
+import cn.qingchengfit.utils.CompatUtils;
 
 
 public class AnimatedButton extends AppCompatImageButton {

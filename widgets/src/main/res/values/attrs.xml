@@ -73,4 +73,12 @@
     <attr format="color" name="bg_color"/>
     <attr format="dimension" name="radius"/>
   </declare-styleable>
+  <declare-styleable name="QcToggleButtom" >
+    <attr format="string" name="qc_text"/>
+    <attr format="dimension" name="qc_text_size"/>
+    <attr format="color" name="qc_color_on"/>
+    <attr format="color" name="qc_color_off"/>
+    <attr format="boolean" name="qc_checked"/>
+    <attr format="reference" name="qc_vc_drawable"/>
+  </declare-styleable>
 </resources>

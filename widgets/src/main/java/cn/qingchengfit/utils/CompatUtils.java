@@ -1,4 +1,4 @@
-package cn.qingchengfit.widgets.utils;
+package cn.qingchengfit.utils;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;

@@ -12,8 +12,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import cn.qingchengfit.widgets.utils.CrashUtils;
-import cn.qingchengfit.widgets.utils.ToastUtils;
+import cn.qingchengfit.utils.CrashUtils;
+import cn.qingchengfit.utils.ToastUtils;
 
 
 /**

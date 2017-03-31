@@ -1,4 +1,4 @@
-package cn.qingchengfit.widgets.utils;
+package cn.qingchengfit.utils;
 
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.StateListDrawable;
