@@ -141,8 +141,4 @@ public class AlphabetView extends LinearLayout {
         void onChange(int position, String s);
     }
 
-    @IntDef({View.VISIBLE, View.GONE})
-    @Retention(RetentionPolicy.RUNTIME)
-    public @interface DialogState {
-    }
 }
