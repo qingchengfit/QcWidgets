@@ -379,4 +379,27 @@ public class DateUtils {
         return formatDateFromYYYYMMDD(YYYYMMDDa).getTime() <= formatDateFromYYYYMMDD(YYYYMMDDb).getTime();
     }
 
+        public static Date formatDatefromMMDD(String s){
+            SimpleDateFormat formatter = new SimpleDateFormat("MM-dd", Locale.CHINA);
+            Date date = null;
+            try {
+                date = formatter.parse(s);
+            } catch (ParseException e) {
+            }
+            return date;
+        }
+    public static String Date2YYYYMMDDV2(Date d) {
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy年MM月dd日", Locale.CHINA);
+                return formatter.format(d);
+            }
+    public static int getDayOfMonth(Date d){
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(d);
+        return calendar.get(Calendar.DAY_OF_MONTH);
+
+    }
+
+    public static String getStringToday() {
+        return DateUtils.Date2YYYYMMDD(new Date());
+    }
 }

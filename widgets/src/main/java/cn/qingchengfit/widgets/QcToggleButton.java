@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.text.TextPaint;
 import android.util.AttributeSet;
@@ -56,7 +57,10 @@ public class QcToggleButton extends View implements Checkable{
     public QcToggleButton(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         final TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.QcToggleButtom, defStyleAttr, 0);
-        buttonDrawable = a.getDrawable(R.styleable.QcToggleButtom_qc_vc_drawable);
+        int dr = a.getResourceId(R.styleable.QcToggleButtom_qc_vc_drawable,-1);
+        if (dr > 0){
+            buttonDrawable = ContextCompat.getDrawable(getContext(),dr);
+        }
         if (buttonDrawable != null)
             buttonDrawable = buttonDrawable.mutate();
         text = a.getString(R.styleable.QcToggleButtom_qc_text);

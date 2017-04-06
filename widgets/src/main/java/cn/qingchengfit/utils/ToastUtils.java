@@ -72,4 +72,9 @@ public class ToastUtils {
 
     }
 
+    public static <T> void logHttp(T t){
+        show("network info");
+    }
+
+
 }
