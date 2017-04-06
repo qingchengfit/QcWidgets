@@ -16,6 +16,8 @@
     <dimen name="btn_font">16sp</dimen>
     <dimen name="large_font">18sp</dimen>
     <dimen name="max_font">24sp</dimen>
+
+
     <dimen name="qc_item_height">44dp</dimen>
     <dimen name="qc_item_height_outside">54dp</dimen>
     <dimen name="qc_drawer_item_height">58dp</dimen>
@@ -46,4 +48,7 @@
     <dimen name="form_height">36dp</dimen>
     <dimen name="little">8dp</dimen>
     <dimen name="qc_allotsale_search_hight">32dp</dimen>
+
+
+
 </resources>

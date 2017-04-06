@@ -3,6 +3,7 @@ package cn.qingchengfit.widgets;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;
@@ -129,7 +130,8 @@ public class CheckBoxButton extends LinearLayout {
                 }
             }
         });
-        checkBox.setButtonDrawable(mCheckboxIconSelect);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+            checkBox.setButtonDrawable(mCheckboxIconSelect);
         setTextColorAndbackGround();
     }
 

@@ -82,21 +82,40 @@ public class ConnerTag extends View {
         drawBg(canvas);
     }
 
+    public void setBgColor(int bgColor) {
+        this.bgColor = bgColor;
+        bgPaint.setColor(bgColor);
+    }
+
+    public void setText(String mText) {
+        this.mText = mText;
+    }
 
     private void drawBg(Canvas canvas) {
         int w = getWidth(), h = getHeight();
         canvas.drawArc(new RectF(w-mRaduim*2,0,w,mRaduim*2),0,-90,false,bgPaint);
         Path path = new Path();
-        path.moveTo(0,0);
+        path.moveTo(2,0);
         path.lineTo(w-mRaduim,0);
         path.lineTo(w,mRaduim);
-        path.lineTo(w,h);
+        path.lineTo(w,h-2);
         path.close();
+        bgPaint.setColor(bgColor);
         canvas.drawPath(path,bgPaint);
+        Path path1 = new Path();
+        path1.moveTo(0,0);
+        path1.lineTo(2,0);
+        path1.lineTo(w,h-2);
+        path1.lineTo(w,h);
+        path1.close();
+        bgPaint.setColor(Color.WHITE);
+        canvas.drawPath(path1,bgPaint);
         canvas.save();
-        textPaint.setTextSize(w/6);
+        textPaint.setTextSize(w/5);
+        float textlenght = textPaint.measureText(mText);
+        canvas.translate(w/2,0);
         canvas.rotate(45);
-        canvas.drawText(mText, w/3 , -w/7, textPaint);
+        canvas.drawText(mText, (int)(0.7*w/2-textlenght/2)  , h/5, textPaint);
         canvas.restore();
     }
 }

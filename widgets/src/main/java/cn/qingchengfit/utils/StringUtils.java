@@ -1,6 +1,7 @@
-package cn.qingchengfit.widgets.utils;
+package cn.qingchengfit.utils;
 
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
 import cn.qingchengfit.widgets.Constant;
 import java.util.ArrayList;
 import java.util.List;
@@ -98,6 +99,13 @@ public class StringUtils {
         }
         return ret;
     }
+
+    public static String  getStringHtml(String text,String color){
+        return TextUtils.concat("<font color=\""+color+"\">"+text+"</font>").toString();
+    }
+
+
+
 
 
 }

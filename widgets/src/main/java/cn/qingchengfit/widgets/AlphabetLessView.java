@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.Handler;
 import android.support.annotation.IntDef;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.view.MotionEventCompat;
 import android.util.AttributeSet;
 import android.view.Gravity;
@@ -12,8 +13,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import cn.qingchengfit.utils.MeasureUtils;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * power by
@@ -28,102 +32,101 @@ import java.lang.annotation.RetentionPolicy;
  * <p/>
  * Created by Paper on 15/10/20 2015.
  */
-public class AlphabetView extends LinearLayout {
+public class AlphabetLessView extends LinearLayout {
     private TextView alphaDialog;
 
-    public static String[] alphabetStrings = new String[]{
-            "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V"
-            , "W", "X", "Y", "Z", "#"
-    };
-    public static String Alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    private List<String> alphabetStrings = new ArrayList<>();
+    private List<Integer> rvPos = new ArrayList<>();
     public int height;
     public int cellHeight;
     private OnAlphabetChange onAlphabetChange;
+    public static String Alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz#";
 
-    public AlphabetView(Context context) {
+    public AlphabetLessView(Context context) {
         super(context);
-        init();
     }
 
-    public AlphabetView(Context context, AttributeSet attrs) {
+    public AlphabetLessView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init();
     }
 
-    public AlphabetView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public AlphabetLessView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init();
     }
 
     public void setOnAlphabetChange(OnAlphabetChange onAlphabetChange) {
         this.onAlphabetChange = onAlphabetChange;
     }
 
-    private void init() {
+    public void addElement(String s,int x) {
+        if (Alphabet.contains(s) && !alphabetStrings.contains(s)) {
+            alphabetStrings.add(s);
+            rvPos.add(x);
+        }
+    }
+
+    public void clearElement() {
+        alphabetStrings.clear();
+        rvPos.clear();
+    }
+
+    public void init() {
+        //this.cellHeight = 20;
         this.setOrientation(VERTICAL);
         this.setBackgroundResource(R.color.transparent);
         requestDisallowInterceptTouchEvent(true);
         //        LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams)getLayoutParams();
 
-        for (int i = 0; i < alphabetStrings.length; i++) {
+        for (int i = 0; i < alphabetStrings.size(); i++) {
             TextView textView = new TextView(getContext());
-            textView.setText(alphabetStrings[i]);
+            textView.setText(alphabetStrings.get(i).toUpperCase());
             textView.setTextSize(12);
             textView.setTextColor(Color.BLACK);
-            textView.setGravity(Gravity.CENTER);
-//            textView.setPadding(10, 0, 10, 0);
+            textView.setGravity(Gravity.CENTER_VERTICAL | GravityCompat.END);
+            //            textView.setPadding(10, 0, 10, 0);
 
-            LayoutParams layoutParams = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            LayoutParams layoutParams = new LayoutParams(MeasureUtils.dpToPx(30f, getResources()), ViewGroup.LayoutParams.WRAP_CONTENT);
             layoutParams.setMargins(5, 0, 5, 0);
             addView(textView, layoutParams);
         }
-
+        invalidate();
     }
 
-    @Override
-    protected void onLayout(boolean changed, int l, int t, int r, int b) {
+    @Override protected void onLayout(boolean changed, int l, int t, int r, int b) {
         super.onLayout(changed, l, t, r, b);
         height = getMeasuredHeight() - getPaddingTop();
-        cellHeight = height / alphabetStrings.length;
+        if (alphabetStrings.size() > 0) cellHeight = height / alphabetStrings.size();
     }
 
     public void setAlphaDialog(TextView alphaDialog) {
         this.alphaDialog = alphaDialog;
     }
 
-    @Override
-    public boolean onInterceptTouchEvent(MotionEvent ev) {
+    @Override public boolean onInterceptTouchEvent(MotionEvent ev) {
         return true;
     }
 
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
+    @Override public boolean onTouchEvent(MotionEvent event) {
 
         float y = event.getY() - getPaddingTop();
         switch (MotionEventCompat.getActionMasked(event)) {
             case MotionEvent.ACTION_DOWN:
-//                onAlphabetChange.isShowTialog(GONE, "");
-//                return true;
-//            case MotionEvent.ACTION_UP:
             case MotionEvent.ACTION_MOVE:
                 int position = (int) y / cellHeight;
-                if (position < 0)
-                    position = 0;
-                if (position < alphabetStrings.length && onAlphabetChange != null) {
-                    onAlphabetChange.onChange(position, alphabetStrings[position]);
+                if (position < 0) position = 0;
+                if (position < alphabetStrings.size() && onAlphabetChange != null) {
+                    onAlphabetChange.onChange(position, alphabetStrings.get(position),rvPos.get(position));
                     if (alphaDialog != null) {
                         alphaDialog.setVisibility(VISIBLE);
-                        alphaDialog.setText(alphabetStrings[position]);
+                        alphaDialog.setText(alphabetStrings.get(position));
                     }
                 }
 
             case MotionEvent.ACTION_UP:
                 if (alphaDialog != null) {
                     new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
+                        @Override public void run() {
                             alphaDialog.setVisibility(GONE);
-
                         }
                     }, 300);
                 }
@@ -131,13 +134,13 @@ public class AlphabetView extends LinearLayout {
             default:
         }
 
-
-        return super.onTouchEvent(event);
-
+        return true;
     }
 
     public interface OnAlphabetChange {
-        void onChange(int position, String s);
+        void onChange(int position, String s,int RvPos);
     }
 
+    @IntDef({ View.VISIBLE, View.GONE }) @Retention(RetentionPolicy.RUNTIME) public @interface DialogState {
+    }
 }

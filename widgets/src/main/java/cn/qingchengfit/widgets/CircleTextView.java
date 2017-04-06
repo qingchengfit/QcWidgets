@@ -8,9 +8,7 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.util.TypedValue;
-import android.view.ViewTreeObserver;
-
-import cn.qingchengfit.widgets.utils.MeasureUtils;
+import cn.qingchengfit.utils.MeasureUtils;
 
 /**
  * Created by fb on 2017/3/20.
@@ -47,37 +45,32 @@ public class CircleTextView extends android.support.v7.widget.AppCompatTextView 
     private void init(Context context, AttributeSet attrs){
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.CircleBackground);
         color = typedArray.getColor(R.styleable.CircleBackground_border_color, context.getResources().getColor(R.color.qc_allotsale_green));
-        borderWidth = typedArray.getDimension(R.styleable.CircleBackground_border_width, MeasureUtils.dpToPx(3f, context.getResources()));
+        borderWidth = typedArray.getDimension(R.styleable.CircleBackground_border_width, MeasureUtils
+            .dpToPx(3f, context.getResources()));
         content = typedArray.getString(R.styleable.CircleBackground_content);
-        contentSize = typedArray.getDimension(R.styleable.CircleBackground_contentSize, MeasureUtils.dpToPx(13f, context.getResources()));
+        contentSize = typedArray.getDimension(R.styleable.CircleBackground_contentSize, 13);
         typedArray.recycle();
         if (mPaint == null){
             mPaint = new Paint();
             mPaint.setAntiAlias(true);
-            mPaint.setStyle(Paint.Style.STROKE);
         }
         if (rectF == null){
             rectF = new RectF();
         }
         mPaint.setTextSize(contentSize);
-        mPaint.setStrokeWidth(borderWidth);
         mPaint.setColor(color);
 
-        //控制字体大小
-        getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                float measureWidth = getPaint().measureText(String.valueOf(getText()));
-                int width = getWidth() - getPaddingLeft() - getPaddingRight();
-                float textSize = getTextSize();
-                if (width < measureWidth) {
-                    textSize = (width / measureWidth) * textSize;
-                }
-                setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
-                getViewTreeObserver().removeGlobalOnLayoutListener(this);
-            }
-        });
+    }
 
+    @Override protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
+        super.onLayout(changed, left, top, right, bottom);
+        float measureWidth = getPaint().measureText(String.valueOf(getText()));
+        int width = getWidth() - getPaddingLeft() - getPaddingRight();
+        float textSize = getTextSize();
+        if (width * 0.85 < measureWidth) {
+            textSize = (width * 0.85f / measureWidth) * textSize;
+        }
+        setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
     }
 
     @Override
@@ -88,8 +81,12 @@ public class CircleTextView extends android.support.v7.widget.AppCompatTextView 
         rectF.left = borderWidth;
         rectF.bottom = getMeasuredHeight() - borderWidth ;
 
+        mPaint.setStyle(Paint.Style.STROKE);
+        mPaint.setStrokeWidth(borderWidth);
         canvas.drawArc(rectF, 45, -270, false, mPaint);
         mPaint.getTextBounds(content, 0, content.length(), bounds);
+        mPaint.setStrokeWidth(1f);
+        mPaint.setStyle(Paint.Style.FILL);
         canvas.drawText(content, getMeasuredWidth()/2 - bounds.width()/2, getMeasuredHeight() * 0.85f, mPaint);
     }
 }
