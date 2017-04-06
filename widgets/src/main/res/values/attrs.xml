@@ -73,6 +73,14 @@
     <attr format="color" name="bg_color"/>
     <attr format="dimension" name="radius"/>
   </declare-styleable>
+
+  <declare-styleable name="CircleBackground" >
+    <attr format="color" name="border_color"/>
+    <attr format="dimension" name="border_width"/>
+    <attr format="string" name="content"/>
+    <attr format="dimension" name="contentSize"/>
+  </declare-styleable>
+
   <declare-styleable name="QcToggleButtom" >
     <attr format="string" name="qc_text"/>
     <attr format="dimension" name="qc_text_size"/>
