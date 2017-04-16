@@ -105,6 +105,10 @@ public class DateUtils {
         return date;
     }
 
+    public static void formatDatefromMMDD(String s){
+
+    }
+
     public static Date getDateFromHHmmss(String s) {
         SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss", Locale.CHINA);
         Date date = null;
@@ -294,6 +298,13 @@ public class DateUtils {
         } else return i - 2;
     }
 
+    public static void getStringToday(){
+
+    }
+
+    public static void getDayOfMonth(Date data){
+
+    }
 
     public static long getToadayMidnight() {
         Calendar c = Calendar.getInstance();

@@ -15,20 +15,18 @@ public class AutoLineGroup extends ViewGroup {
     private int mScreenWidth;
     private int mHorizontalSpacing;
     private int mVerticalSpacing;
+    private int mHeight = 0;
 
     public AutoLineGroup(Context context) {
         super(context);
-        init();
     }
 
     public AutoLineGroup(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init();
     }
 
     public AutoLineGroup(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init();
     }
 
     public void setSpacing(int horizontalSpacing, int verticalSpacing) {
@@ -36,9 +34,12 @@ public class AutoLineGroup extends ViewGroup {
         mVerticalSpacing = verticalSpacing;
     }
 
-    private void init() {
-        DisplayMetrics dm = getResources().getDisplayMetrics();
-        mScreenWidth = dm.widthPixels;
+    private void init(){
+        getLayoutParams().height = 0;
+    }
+
+    public void setmScreenWidth(int mScreenWidth) {
+        this.mScreenWidth = mScreenWidth;
     }
 
     @Override
@@ -55,20 +56,29 @@ public class AutoLineGroup extends ViewGroup {
         int mTotalWidth = 0;
         int mTempHeight = 0;
         int childCount = getChildCount();
+        int index = 1;
         for (int i = 0; i < childCount; i++) {
             View childView = getChildAt(i);
             int measureHeight = childView.getMeasuredHeight();
             int measuredWidth = childView.getMeasuredWidth();
+            mHeight = childView.getMeasuredHeight();
             mTempHeight = (measureHeight > mTempHeight) ? measureHeight : mTempHeight;
-            if ((measuredWidth + mTotalWidth + mHorizontalSpacing) > mScreenWidth) {
+            if ((measuredWidth + mTotalWidth + mHorizontalSpacing) > getMeasuredWidth()) {
                 mTotalWidth = 0;
                 mTotalHeight += (mTempHeight + mVerticalSpacing);
                 mTempHeight = 0;
+                index++;
             }
-            childView.layout(mTotalWidth + mHorizontalSpacing, mTotalHeight, measuredWidth + mTotalWidth + mHorizontalSpacing, mTotalHeight + measureHeight);
+            if (mTotalWidth == 0) {
+                childView.layout(mTotalWidth, mTotalHeight, measuredWidth + mTotalWidth + mHorizontalSpacing, mTotalHeight + measureHeight);
+            }else {
+                childView.layout(mTotalWidth + mHorizontalSpacing, mTotalHeight, measuredWidth + mTotalWidth + mHorizontalSpacing, mTotalHeight + measureHeight);
+            }
             mTotalWidth += (measuredWidth + mHorizontalSpacing);
-
-
+        }
+        if (childCount > 0) {
+            getLayoutParams().height = mHeight * index + mVerticalSpacing * 2;
         }
     }
+
 }

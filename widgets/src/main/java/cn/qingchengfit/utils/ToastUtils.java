@@ -57,9 +57,6 @@ public class ToastUtils {
 //        }
     }
 
-
-
-
     public static void showS(String content) {
 //        show(R.drawable.ic_share_success, content);
     }

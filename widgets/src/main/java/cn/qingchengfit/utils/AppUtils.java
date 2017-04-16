@@ -75,6 +75,10 @@ public class AppUtils {
         inputManager.hideSoftInputFromWindow(v.getWindowToken(), 0);
     }
 
+    public static void hideKeyboardFore(Context context){
+
+    }
+
     public boolean isAppOnForeground(Context context) {
         ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
         List<ActivityManager.RunningTaskInfo> tasksInfo = activityManager.getRunningTasks(1);
