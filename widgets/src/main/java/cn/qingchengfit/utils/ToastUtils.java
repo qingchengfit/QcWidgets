@@ -67,6 +67,8 @@ public class ToastUtils {
     public static void showDefaultStyle(String content) {
         if (gToast != null)
             gToast.cancel();
+        if (context == null)
+            return;
         gToast = Toast.makeText(context, content, Toast.LENGTH_SHORT);
         gToast.show();
 

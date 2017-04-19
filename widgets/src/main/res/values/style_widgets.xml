@@ -3,4 +3,13 @@
   <style name="Qc.CheckBox" parent="@style/Widget.AppCompat.CompoundButton.CheckBox">
     <item name="android:button">@drawable/selector_qc_checkbox</item>
   </style>
+  <style name="Qc.CheckBox2" parent="@style/Widget.AppCompat.CompoundButton.CheckBox">
+    <item name="android:button">@drawable/selector_qc_checkbox_2</item>
+  </style>
+
+  <style name="QcBtnNomal"
+      >
+
+  </style>
+
 </resources>

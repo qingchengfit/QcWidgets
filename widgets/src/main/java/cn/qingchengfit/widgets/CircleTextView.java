@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import cn.qingchengfit.utils.MeasureUtils;
@@ -44,7 +45,7 @@ public class CircleTextView extends android.support.v7.widget.AppCompatTextView 
 
     private void init(Context context, AttributeSet attrs){
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.CircleBackground);
-        color = typedArray.getColor(R.styleable.CircleBackground_border_color, context.getResources().getColor(R.color.qc_allotsale_green));
+        color = typedArray.getColor(R.styleable.CircleBackground_border_color, ContextCompat.getColor(context,R.color.qc_allotsale_green) );
         borderWidth = typedArray.getDimension(R.styleable.CircleBackground_border_width, MeasureUtils
             .dpToPx(3f, context.getResources()));
         content = typedArray.getString(R.styleable.CircleBackground_content);

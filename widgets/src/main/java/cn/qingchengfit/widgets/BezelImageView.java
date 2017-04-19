@@ -37,7 +37,7 @@ import android.widget.ImageView;
  * drawable on top. This is useful for applying a beveled look to image contents, but is also
  * flexible enough for use with other desired aesthetics.
  */
-public class BezelImageView extends ImageView {
+public class BezelImageView extends android.support.v7.widget.AppCompatImageView {
     private Paint mBlackPaint;
     private Paint mMaskedPaint;
 
