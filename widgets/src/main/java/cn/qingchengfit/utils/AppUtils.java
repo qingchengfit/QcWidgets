@@ -12,7 +12,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -48,7 +48,6 @@ public class AppUtils {
         }
     }
 
-
     public static void install(Context context, String filePath) {
         Intent i = new Intent(Intent.ACTION_VIEW);
         i.setDataAndType(Uri.parse("file://" + filePath), "application/vnd.android.package-archive");
@@ -59,18 +58,16 @@ public class AppUtils {
     public static void showKeyboard(Context context, View v) {
         InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.showSoftInput(v, InputMethodManager.SHOW_IMPLICIT);
-//        ((InputMethodManager)context.getSystemService(Context.INPUT_METHOD_SERVICE)).toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
+        //        ((InputMethodManager)context.getSystemService(Context.INPUT_METHOD_SERVICE)).toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
 
     }
 
     public static void hideKeyboard(Activity activity) {
-        InputMethodManager inputManager = (InputMethodManager) activity
-                .getSystemService(Context.INPUT_METHOD_SERVICE);
+        InputMethodManager inputManager = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
 
         // check if no view has focus:
         View v = activity.getCurrentFocus();
-        if (v == null)
-            return;
+        if (v == null) return;
 
         inputManager.hideSoftInputFromWindow(v.getWindowToken(), 0);
     }
@@ -85,46 +82,43 @@ public class AppUtils {
         if (tasksInfo.size() > 0) {
 
             // 应用程序位于堆栈的顶层
-            if (TextUtils.equals(tasksInfo.get(0).topActivity
-                    .getPackageName(), context.getPackageName())) {
+            if (TextUtils.equals(tasksInfo.get(0).topActivity.getPackageName(), context.getPackageName())) {
                 return true;
             }
         }
         return false;
     }
 
-    public static void doSendSMSTo(Context context, String phoneNumber){
-        if(PhoneNumberUtils.isGlobalPhoneNumber(phoneNumber)){
-            Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.parse("smsto:"+phoneNumber));
+    public static void doSendSMSTo(Context context, String phoneNumber) {
+        if (PhoneNumberUtils.isGlobalPhoneNumber(phoneNumber)) {
+            Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.parse("smsto:" + phoneNumber));
             context.startActivity(intent);
         }
     }
 
-
-
-
     /**
      * 判断应用是否已经启动
      *
-     * @param context     一个context
+     * @param context 一个context
      * @param packageName 要判断应用的包名
      * @return boolean
      */
     public static boolean isAppAlive(Context context, String packageName) {
-        ActivityManager activityManager =
-                (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
-        List<ActivityManager.RunningAppProcessInfo> processInfos
-                = activityManager.getRunningAppProcesses();
+        ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningAppProcessInfo> processInfos = activityManager.getRunningAppProcesses();
         for (int i = 0; i < processInfos.size(); i++) {
             if (processInfos.get(i).processName.equals(packageName)) {
-                Log.i("NotificationLaunch",
-                        String.format("the %s is running, isAppAlive return true", packageName));
+                Log.i("NotificationLaunch", String.format("the %s is running, isAppAlive return true", packageName));
                 return true;
             }
         }
-        Log.i("NotificationLaunch",
-                String.format("the %s is not running, isAppAlive return false", packageName));
+        Log.i("NotificationLaunch", String.format("the %s is not running, isAppAlive return false", packageName));
         return false;
+    }
+
+    public static void hideKeyboardFore(Context context) {
+        InputMethodManager inputMethodManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+        inputMethodManager.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
     }
 
 

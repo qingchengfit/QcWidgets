@@ -76,7 +76,7 @@ public class AlphabetLessView extends LinearLayout {
         this.setBackgroundResource(R.color.transparent);
         requestDisallowInterceptTouchEvent(true);
         //        LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams)getLayoutParams();
-
+        removeAllViews();
         for (int i = 0; i < alphabetStrings.size(); i++) {
             TextView textView = new TextView(getContext());
             textView.setText(alphabetStrings.get(i).toUpperCase());

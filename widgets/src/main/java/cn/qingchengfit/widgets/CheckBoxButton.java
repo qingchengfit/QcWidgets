@@ -15,7 +15,7 @@ import android.widget.TextView;
 /**
  * Created by yangming on 16/11/11.
  */
-
+@Deprecated
 public class CheckBoxButton extends LinearLayout {
 
     /*选中时字体颜色*/

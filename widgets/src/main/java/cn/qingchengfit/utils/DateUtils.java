@@ -22,8 +22,11 @@ import java.util.Locale;
  */
 public class DateUtils {
     public static final Long MONTH_TIME = 31 * 24 * 60 * 60 * 1000l;
-    public static final Long DAY_TIME = 24 * 60 * 60 * 1000l;
-    public static final Long HOUR_TIME = 60 * 60 * 1000l;
+    public static final Long DAY_TIME = 24 * 60 * 60 * 1000L;
+    public static final Long HOUR_TIME = 60 * 60 * 1000L;
+    public static final Long MINITE_TIME = 60 * 1000L;
+    public static final Long SECOND_TIME = 1000L;
+
     public static Date formatDateFromServer(String s) {
         try {
             s = s.replace("T", " ");
@@ -32,25 +35,25 @@ public class DateUtils {
             date = formatter.parse(s);
             return date;
         } catch (ParseException e) {
-//            e.printStackTrace();
+            //            e.printStackTrace();
             return new Date();
         } catch (Exception e) {
-//            e.printStackTrace();
+            //            e.printStackTrace();
             return new Date();
         }
-
     }
 
     public static String getYYYYMMDDfromServer(String s) {
         try {
             if (s.contains("T")) {
                 return DateUtils.Date2YYYYMMDD(DateUtils.formatDateFromServer(s));
-            } else return s;
-        }catch (Exception e){
+            } else {
+                return s;
+            }
+        } catch (Exception e) {
             return "错误日期";
         }
     }
-
 
     public static boolean isOutOfDate(Date date) {
         return date.getTime() < getDayMidnight(new Date());
@@ -61,14 +64,14 @@ public class DateUtils {
         return formatter.format(date);
     }
 
-
     /**
      * 获取3小时前的日期时间
      * 返回格式 2016-09-09T10:00:00
      * 签到列表参数用
+     *
      * @return 2016-09-09T10:00:00
      */
-    public static String date2YYMMDDTHHMMSS(Date date){
+    public static String date2YYMMDDTHHMMSS(Date date) {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
         String dateStr = formatter.format(date);
         String[] dateArr = dateStr.split(" ");
@@ -77,7 +80,7 @@ public class DateUtils {
         return stringBuffer.toString();
     }
 
-    public static String getChineseMonth(Date date){
+    public static String getChineseMonth(Date date) {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy年MM月", Locale.CHINA);
         return formatter.format(date);
     }
@@ -86,12 +89,10 @@ public class DateUtils {
         try {
             s = s.replace("T", " ");
             return s.substring(0, s.length() - 1);
-
         } catch (Exception e) {
-//            e.printStackTrace();
+            //            e.printStackTrace();
             return "";
         }
-
     }
 
     public static Date formatDateFromYYYYMMDD(String s) {
@@ -103,10 +104,6 @@ public class DateUtils {
             e.printStackTrace();
         }
         return date;
-    }
-
-    public static void formatDatefromMMDD(String s){
-
     }
 
     public static Date getDateFromHHmmss(String s) {
@@ -131,12 +128,11 @@ public class DateUtils {
         return date;
     }
 
-
-//    public static String getDateDay(Date d) {
-//
-//        SimpleDateFormat formatter = new SimpleDateFormat("yyyy.MM.dd", Locale.CHINA);
-//        return formatter.format(d);
-//    }
+    //    public static String getDateDay(Date d) {
+    //
+    //        SimpleDateFormat formatter = new SimpleDateFormat("yyyy.MM.dd", Locale.CHINA);
+    //        return formatter.format(d);
+    //    }
 
     public static String Date2YYYYMMDD(Date d) {
 
@@ -144,11 +140,11 @@ public class DateUtils {
         return formatter.format(d);
     }
 
-//    public static String getServerDateDayAddMonth(Date d, int i) {
-//
-//        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA);
-//        return formatter.format(addDateMonth(d, i));
-//    }
+    //    public static String getServerDateDayAddMonth(Date d, int i) {
+    //
+    //        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA);
+    //        return formatter.format(addDateMonth(d, i));
+    //    }
 
     public static String Date2YYYYMMDDHHmm(Date d) {
 
@@ -161,7 +157,6 @@ public class DateUtils {
         SimpleDateFormat formatter = new SimpleDateFormat("MM-dd", Locale.CHINA);
         return formatter.format(d);
     }
-
 
     public static String Date2YYYYMM(Date d) {
 
@@ -202,7 +197,7 @@ public class DateUtils {
         return c.getTime();
     }
 
-  public static Date addDay(Date d, int i) {
+    public static Date addDay(Date d, int i) {
         Calendar c = Calendar.getInstance();
         c.setTime(d);
         c.add(Calendar.DATE, i);
@@ -218,8 +213,7 @@ public class DateUtils {
         Calendar c = Calendar.getInstance();
         c.setTime(date);
         int day_of_week = c.get(Calendar.DAY_OF_WEEK) - 1;
-        if (day_of_week == 0)
-            day_of_week = 7;
+        if (day_of_week == 0) day_of_week = 7;
         c.add(Calendar.DATE, -day_of_week + 1);
         return Date2YYYYMMDD(c.getTime());
     }
@@ -233,8 +227,7 @@ public class DateUtils {
         Calendar c = Calendar.getInstance();
         c.setTime(date);
         int day_of_week = c.get(Calendar.DAY_OF_WEEK) - 1;
-        if (day_of_week == 0)
-            day_of_week = 7;
+        if (day_of_week == 0) day_of_week = 7;
         c.add(Calendar.DATE, -day_of_week + 7);
         return Date2YYYYMMDD(c.getTime());
     }
@@ -246,7 +239,6 @@ public class DateUtils {
         c.set(Calendar.DAY_OF_MONTH, 0);
         return Date2YYYYMMDD(c.getTime());
     }
-
 
     public static String getEndDayOfMonthNew(Date date) {
         Calendar c = Calendar.getInstance();
@@ -285,6 +277,7 @@ public class DateUtils {
         Date e = formatDateFromYYYYMMDD(end);
         return (int) ((e.getTime() - s.getTime()) / DAY_TIME);
     }
+
     public static int interval(Date start, Date end) {
         return (int) ((end.getTime() - start.getTime()) / DAY_TIME);
     }
@@ -295,15 +288,9 @@ public class DateUtils {
         int i = c.get(Calendar.DAY_OF_WEEK);
         if (i == 1) {
             return 6;
-        } else return i - 2;
-    }
-
-    public static void getStringToday(){
-
-    }
-
-    public static void getDayOfMonth(Date data){
-
+        } else {
+            return i - 2;
+        }
     }
 
     public static long getToadayMidnight() {
@@ -343,7 +330,6 @@ public class DateUtils {
         return Date2YYYYMMDD(c.getTime());
     }
 
-
     public static int getYear(Date d) {
         Calendar c = Calendar.getInstance();
         c.setTime(d);
@@ -354,7 +340,6 @@ public class DateUtils {
      * 记住要+1
      *
      * @param d 记住要+1
-     * @return
      */
     public static int getMonth(Date d) {
         Calendar c = Calendar.getInstance();
@@ -364,18 +349,15 @@ public class DateUtils {
 
     /**
      * 得到一周的开始时间和结束时间
-     * @param count
-     * @return
      */
-    public static Pair<String,String> getWeek(int count){
+    public static Pair<String, String> getWeek(int count) {
         Calendar s = Calendar.getInstance();
-        s.add(Calendar.DATE,count*7);
-        s.set(Calendar.DAY_OF_WEEK,Calendar.SUNDAY);
+        s.add(Calendar.DATE, count * 7);
+        s.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
         String start = Date2YYYYMMDD(s.getTime());
-        s.set(Calendar.DAY_OF_WEEK,Calendar.SATURDAY);
+        s.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
         String end = Date2YYYYMMDD(s.getTime());
-        return new Pair<>(start,end);
-
+        return new Pair<>(start, end);
     }
 
     public static int dayNumFromToday(Date d) {
@@ -390,4 +372,53 @@ public class DateUtils {
         return formatDateFromYYYYMMDD(YYYYMMDDa).getTime() <= formatDateFromYYYYMMDD(YYYYMMDDb).getTime();
     }
 
+    public static Date formatDatefromMMDD(String s) {
+        SimpleDateFormat formatter = new SimpleDateFormat("MM-dd", Locale.CHINA);
+        Date date = null;
+        try {
+            date = formatter.parse(s);
+        } catch (ParseException e) {
+        }
+        return date;
+    }
+
+    public static String Date2YYYYMMDDV2(Date d) {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy年MM月dd日", Locale.CHINA);
+        return formatter.format(d);
+    }
+
+    public static int getDayOfMonth(Date d) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(d);
+        return calendar.get(Calendar.DAY_OF_MONTH);
+    }
+
+    public static String getStringToday() {
+        return DateUtils.Date2YYYYMMDD(new Date());
+    }
+
+    public static String getNotifacationTimeStr(Date d) {
+        long intelnal = new Date().getTime() - d.getTime();
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        long lastDayInternal = d.getTime() - calendar.getTime().getTime();
+        if (lastDayInternal < 4 * HOUR_TIME) {
+            lastDayInternal = 4 * HOUR_TIME;
+        }
+        if (intelnal < MINITE_TIME) {
+            return "刚刚";
+        } else if (intelnal < HOUR_TIME) {
+            return intelnal / MINITE_TIME + "分钟前";
+        } else if (intelnal < HOUR_TIME * 4) {
+            return intelnal / HOUR_TIME + "小时前";
+        } else if (intelnal < lastDayInternal) {
+            return "今天" + getTimeHHMM(d);
+        } else if (intelnal < lastDayInternal + DAY_TIME) {
+            return "昨天";
+        } else {
+            return Date2MMDD(d);
+        }
+    }
 }

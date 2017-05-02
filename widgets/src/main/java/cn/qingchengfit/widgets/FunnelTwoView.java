@@ -2,7 +2,6 @@ package cn.qingchengfit.widgets;
 
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -37,7 +36,7 @@ import java.util.List;
  * //
  * //Created by yangming on 16/12/13.
  */
-@SuppressLint("NewApi") public class FunnelTwoView extends View
+public class FunnelTwoView extends View
         implements ValueAnimator.AnimatorUpdateListener {
 
     public static float ANGLE_SCALE = 1.85f;
