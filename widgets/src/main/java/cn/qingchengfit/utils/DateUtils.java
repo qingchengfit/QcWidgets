@@ -400,7 +400,6 @@ public class DateUtils {
     public static String getNotifacationTimeStr(Date d) {
         long intelnal = new Date().getTime() - d.getTime();
         Calendar calendar = Calendar.getInstance();
-        calendar.setTime(d);
         calendar.set(Calendar.HOUR_OF_DAY, 0);
         calendar.set(Calendar.MINUTE, 0);
         calendar.set(Calendar.SECOND, 0);

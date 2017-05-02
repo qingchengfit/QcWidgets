@@ -4,6 +4,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * power by
@@ -35,4 +37,23 @@ public class Utils {
         }
         return OrientationHelper.HORIZONTAL;
     }
+
+    public static int[] toIntArray(List<Integer> list){
+                int[] ret = new int[list.size()];
+                for(int i = 0;i < ret.length;i++)
+                    ret[i] = list.get(i);
+                return ret;
+            }
+
+        public static String checkNull(String t) {
+            if (t == null) {
+                return "";
+            } else return t;
+        }
+
+        public static List checkNull(List t) {
+            if (t == null) {
+                return new ArrayList();
+            } else return t;
+        }
 }
