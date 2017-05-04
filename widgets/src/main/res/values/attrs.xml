@@ -89,4 +89,15 @@
     <attr format="boolean" name="qc_checked"/>
     <attr format="reference" name="qc_vc_drawable"/>
   </declare-styleable>
+
+  <declare-styleable name="QcFilterToggle" >
+    <attr format="string" name="ft_text_on"/>
+    <attr format="string" name="ft_text_off"/>
+    <attr format="dimension" name="ft_text_size"/>
+    <attr format="color" name="ft_color_on"/>
+    <attr format="color" name="ft_color_off"/>
+    <attr format="boolean" name="ft_checked"/>
+    <attr format="reference" name="ft_vc_drawable_on"/>
+    <attr format="reference" name="ft_vc_drawable_off"/>
+  </declare-styleable>
 </resources>

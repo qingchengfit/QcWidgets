@@ -17,13 +17,18 @@
         android:layout_height="200dp"
         />
 
-    <cn.qingchengfit.widgets.ConnerTag
-        android:layout_width="50dp"
+
+    <cn.qingchengfit.widgets.QcFilterToggle
+        android:layout_width="110dp"
         android:layout_height="50dp"
-        android:background="@color/green"
-        app:bg_color="@color/blue"
-        app:text="已停卡"
-        app:radius="10dp"
+        app:ft_text_off="123"
+        app:ft_text_on="345"
+        app:ft_color_off="@color/text_black"
+        app:ft_color_on="@color/text_black"
+        app:ft_checked="true"
+        app:ft_vc_drawable_off="@drawable/ic_arrow_down_black_16dp"
+        app:ft_vc_drawable_on="@drawable/ic_arrow_down_black_16dp"
+        app:ft_text_size="13sp"
         />
     <Button
         android:text="@string/button"
