@@ -8,6 +8,7 @@ import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
 import android.text.TextPaint;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Checkable;
@@ -75,7 +76,10 @@ public class QcFilterToggle extends View implements Checkable{
         a.recycle();
         mTextPaint = new TextPaint(Paint.ANTI_ALIAS_FLAG);
         mTextPaint.setTextSize(textSize);
-
+        if (TextUtils.isEmpty(textOn))
+            textOn = textOff;
+        if (TextUtils.isEmpty(textOff))
+            textOff = textOn;
         setClickable(true);
 
     }

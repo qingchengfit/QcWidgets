@@ -10,12 +10,14 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by yangming on 16/11/11.
  */
 @Deprecated
-public class CheckableButton extends RelativeLayout {
+public class CheckableButton extends RelativeLayout implements QcCheckable{
 
     /*选中时字体颜色*/
     private int mTextColorSelect = 0xffffffff;
@@ -46,7 +48,6 @@ public class CheckableButton extends RelativeLayout {
 
     private Context mContext;
 
-    private CompoundButton.OnCheckedChangeListener mListener ;
 
     private String mHookIconLocation = "";
 
@@ -137,8 +138,12 @@ public class CheckableButton extends RelativeLayout {
                 root.setBackgroundResource(checkBox.isChecked() ? mBackgroundSelect : mBackgroundNormal);
                 content.setTextColor(checkBox.isChecked() ? mTextColorSelect : mTextColorNormal);
                 checkBox.setButtonDrawable(checkBox.isChecked()? mCheckboxIconSelect:mCheckboxIconNormal);
+                for (CompoundButton.OnCheckedChangeListener lister : mListener) {
+                    lister.onCheckedChanged(buttonView,isChecked);
+                }
             }
         });
+        checkBox.setClickable(false);
         checkBox.setButtonDrawable(mCheckboxIconSelect);
         root.setBackgroundResource(isChecked ? mBackgroundSelect : mBackgroundNormal);
         content.setTextColor(isChecked ? mTextColorSelect : mTextColorNormal);
@@ -165,9 +170,7 @@ public class CheckableButton extends RelativeLayout {
         checkBox.setChecked(checked);
     }
 
-    public void setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener listener) {
-        mListener = listener;
-    }
+
 
     private OnClickListener onClickListener;
     public void setClick(OnClickListener listener){
@@ -176,5 +179,17 @@ public class CheckableButton extends RelativeLayout {
 
     public void setContent(String contentStr) {
         content.setText(contentStr);
+    }
+
+
+
+    private List<CompoundButton.OnCheckedChangeListener> mListener = new ArrayList<>();
+
+    @Override public void addCheckedChangeListener(CompoundButton.OnCheckedChangeListener listener) {
+        mListener.add(listener);
+    }
+
+    @Override public boolean isOrContainCheck(View v) {
+        return checkBox.equals(v);
     }
 }

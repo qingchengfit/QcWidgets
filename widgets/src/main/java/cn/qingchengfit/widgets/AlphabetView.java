@@ -113,6 +113,7 @@ public class AlphabetView extends LinearLayout {
                         alphaDialog.setText(alphabetStrings[position]);
                     }
                 }
+                return true;
 
             case MotionEvent.ACTION_UP:
                 if (alphaDialog != null) {
@@ -124,8 +125,7 @@ public class AlphabetView extends LinearLayout {
                         }
                     }, 300);
                 }
-
-            default:
+                return true;
         }
 
 
