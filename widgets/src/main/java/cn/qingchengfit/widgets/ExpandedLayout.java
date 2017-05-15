@@ -140,7 +140,8 @@ public class ExpandedLayout extends LinearLayout {
         leftImage = (ImageView)view.findViewById(R.id.left_icon);
         mSwitcher.setChecked(isExpanded);
         mTvLable.setText(label);
-        leftImage.setImageDrawable(leftDrawable);
+        if (leftDrawable != null)
+            leftImage.setImageDrawable(leftDrawable);
 
         LayoutParams layoutParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, MeasureUtils.dpToPx(40f, getResources()));
         addView(view, 0, layoutParams);

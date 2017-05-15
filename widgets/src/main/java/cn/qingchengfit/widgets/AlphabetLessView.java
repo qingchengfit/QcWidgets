@@ -121,7 +121,7 @@ public class AlphabetLessView extends LinearLayout {
                         alphaDialog.setText(alphabetStrings.get(position));
                     }
                 }
-
+                return true;
             case MotionEvent.ACTION_UP:
                 if (alphaDialog != null) {
                     new Handler().postDelayed(new Runnable() {
@@ -130,7 +130,7 @@ public class AlphabetLessView extends LinearLayout {
                         }
                     }, 300);
                 }
-
+                return true;
             default:
         }
 

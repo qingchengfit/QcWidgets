@@ -11,12 +11,14 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by yangming on 16/11/11.
  */
 @Deprecated
-public class CheckBoxButton extends LinearLayout {
+public class CheckBoxButton extends LinearLayout implements QcCheckable{
 
     /*选中时字体颜色*/
     private int mTextColorSelect = 0xffffffff;
@@ -49,7 +51,6 @@ public class CheckBoxButton extends LinearLayout {
 
     private Context mContext;
 
-    private CompoundButton.OnCheckedChangeListener mListener;
     private OnClickListener onClickListener;
 
     public CheckBoxButton(Context context) {
@@ -128,6 +129,10 @@ public class CheckBoxButton extends LinearLayout {
                 if (onClickListener != null) {
                     onClickListener.onClick(view);
                 }
+                for (CompoundButton.OnCheckedChangeListener lister : mListener) {
+                    if (view instanceof CheckBoxButton)
+                        lister.onCheckedChanged(((CheckBoxButton) view).checkBox,checkBox.isChecked());
+                }
             }
         });
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
@@ -157,10 +162,6 @@ public class CheckBoxButton extends LinearLayout {
         setTextColorAndbackGround();
     }
 
-    public void setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener listener) {
-        mListener = listener;
-        checkBox.setOnCheckedChangeListener(mListener);
-    }
 
     public void setClick(OnClickListener listener) {
         this.onClickListener = listener;
@@ -168,5 +169,16 @@ public class CheckBoxButton extends LinearLayout {
 
     public void setContent(String contentStr) {
         content.setText(contentStr);
+    }
+
+
+    private List<CompoundButton.OnCheckedChangeListener> mListener = new ArrayList<>();
+
+    @Override public void addCheckedChangeListener(CompoundButton.OnCheckedChangeListener listener) {
+        mListener.add(listener);
+    }
+
+    @Override public boolean isOrContainCheck(View v) {
+        return checkBox.equals(v);
     }
 }
